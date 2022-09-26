@@ -68,6 +68,11 @@
 		// Panel - Nutrition level for 100g
 		var nutri_levels = ["fat", "saturated-fat", "sugars", "salt"];
 		nutri_levels.forEach((element) => get_nutrient_level(data, element));
+
+		// Panel - Nutritional table
+		document.querySelector("#col-value-per-package").innerHTML =
+			"As sold per serving (" + data.product.serving_size + ")";
+		fill_table(data);
 	}
 
 	function get_product_name(data) {
@@ -221,6 +226,7 @@
 					get_nutrient_level_symbol(
 						data.product.nutrient_levels["fat"]
 					) +
+					" " +
 					data.product.nutriments.fat_100g +
 					data.product.nutriments.fat_unit +
 					" of Fat";
@@ -231,6 +237,7 @@
 					get_nutrient_level_symbol(
 						data.product.nutrient_levels["saturated-fat"]
 					) +
+					" " +
 					data.product.nutriments["saturated-fat_100g"] +
 					data.product.nutriments["saturated-fat_unit"] +
 					" of Saturated Fat";
@@ -240,6 +247,7 @@
 					get_nutrient_level_symbol(
 						data.product.nutrient_levels.sugars
 					) +
+					" " +
 					data.product.nutriments.sugars_100g +
 					data.product.nutriments.sugars_unit +
 					" of Sugars";
@@ -249,6 +257,7 @@
 					get_nutrient_level_symbol(
 						data.product.nutrient_levels.salt
 					) +
+					" " +
 					data.product.nutriments.salt_100g +
 					data.product.nutriments.salt_unit +
 					" of Salt";
@@ -270,6 +279,33 @@
 		}
 	}
 
+	function fill_table(data) {
+		/* ENERGY */
+		var energy = document.querySelector("#row_energy");
+
+		energy.childNodes[3].innerHTML =
+			data.product.nutriments["energy-kj_100g"] +
+			" " +
+			data.product.nutriments["energy-kj_unit"];
+
+		energy.childNodes[5].innerHTML =
+			data.product.nutriments["energy-kj_serving"] +
+			" " +
+			data.product.nutriments["energy-kj_unit"];
+
+		/* FAT */
+		var fat = document.querySelector("#row_fat");
+
+		fat.childNodes[3].innerHTML =
+			data.product.nutriments["fat_100g"] +
+			" " +
+			data.product.nutriments["fat_unit"];
+
+		fat.childNodes[5].innerHTML =
+			data.product.nutriments["fat_serving"] +
+			" " +
+			data.product.nutriments["fat_unit"];
+	}
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 	/*                            LISTENERS                      	*/
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
