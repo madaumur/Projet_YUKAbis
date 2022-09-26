@@ -59,9 +59,15 @@
 			"src",
 			data.product.selected_images.front.small.fr
 		);
+
+		// Panel - Nutrition facts
 		get_nutriscore(data);
 		get_novascore(data);
 		get_ecoscore(data);
+
+		// Panel - Nutrition level for 100g
+		var nutri_levels = ["fat", "saturated-fat", "sugars", "salt"];
+		nutri_levels.forEach((element) => get_nutrient_level(data, element));
 	}
 
 	function get_product_name(data) {
@@ -206,6 +212,64 @@
 		}
 	}
 
+	function get_nutrient_level(data, item) {
+		var element = document.querySelector(`#nutrient-${item}`);
+
+		switch (item) {
+			case "fat":
+				element.innerHTML =
+					get_nutrient_level_symbol(
+						data.product.nutrient_levels["fat"]
+					) +
+					data.product.nutriments.fat_100g +
+					data.product.nutriments.fat_unit +
+					" of Fat";
+				break;
+
+			case "saturated-fat":
+				element.innerHTML =
+					get_nutrient_level_symbol(
+						data.product.nutrient_levels["saturated-fat"]
+					) +
+					data.product.nutriments["saturated-fat_100g"] +
+					data.product.nutriments["saturated-fat_unit"] +
+					" of Saturated Fat";
+				break;
+			case "sugars":
+				element.innerHTML =
+					get_nutrient_level_symbol(
+						data.product.nutrient_levels.sugars
+					) +
+					data.product.nutriments.sugars_100g +
+					data.product.nutriments.sugars_unit +
+					" of Sugars";
+				break;
+			case "salt":
+				element.innerHTML =
+					get_nutrient_level_symbol(
+						data.product.nutrient_levels.salt
+					) +
+					data.product.nutriments.salt_100g +
+					data.product.nutriments.salt_unit +
+					" of Salt";
+				break;
+		}
+	}
+
+	function get_nutrient_level_symbol(data) {
+		switch (data) {
+			case "low":
+				return "🟢";
+				break;
+			case "moderate":
+				return "🟠";
+				break;
+			case "high":
+				return "🔴";
+				break;
+		}
+	}
+
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 	/*                            LISTENERS                      	*/
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -221,4 +285,20 @@
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 	/*                            INITIALIZE                        */
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
+
+	var accordeon = document.getElementsByClassName("accordeon");
+	var i;
+
+	for (i = 0; i < accordeon.length; i++) {
+		accordeon[i].addEventListener("click", function () {
+			this.classList.toggle("active");
+
+			var panel = this.nextElementSibling;
+			if (panel.style.display === "flex") {
+				panel.style.display = "none";
+			} else {
+				panel.style.display = "flex";
+			}
+		});
+	}
 })();

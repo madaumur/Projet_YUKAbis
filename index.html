@@ -29,8 +29,6 @@
 		</header>
 
 		<main>
-			<hr />
-
 			<div id="container-b1">
 				<div id="container-b1-A">
 					<img
@@ -41,21 +39,20 @@
 					/>
 				</div>
 				<div id="container-b1-B">
-					<label id="product-brand">Marque du produit</label>
-					<label id="product-name">Nom du produit</label>
-					<label id="product-quantity">Poids du produit</label>
+					<label id="product-brand">-product brand-</label>
+					<label id="product-name">-product name-</label>
+					<label id="product-quantity">-product quantity-</label>
 				</div>
 			</div>
 
-			<hr />
-
+			<button class="accordeon">Nutrition facts</button>
 			<div id="container-b2">
 				<div id="container-b2-A">
 					<label>Nutriscore : </label>
 					<img
 						id="nutri-image"
-						alt=""
-						title="Nutriscore du produit recherché"
+						alt="NutriScore introuvable"
+						title="NutriScore du produit recherché"
 						src="/ressources/nutriscore/nutriscore-default.svg"
 					/>
 				</div>
@@ -63,8 +60,8 @@
 					<label>Novascore : </label>
 					<img
 						id="nova-image"
-						alt=""
-						title="Novascore du produit recherché"
+						alt="Score NOVA introuvable"
+						title="Score NOVA du produit recherché"
 						src="/ressources/novascore/novascore-default.svg"
 					/>
 				</div>
@@ -72,16 +69,24 @@
 					<label>Ecoscore : </label>
 					<img
 						id="eco-image"
-						alt=""
-						title="Ecoscore du produit recherché"
+						alt="EcoScore introuvable"
+						title="EcoScore du produit recherché"
 						src="/ressources/ecoscore/ecoscore-default.svg"
 					/>
 				</div>
 			</div>
 
-			<hr />
-
-			<div id="container-b3"></div>
+			<button class="accordeon">Nutrient levels for 100 g</button>
+			<div id="container-b3">
+				<label id="nutrient-fat">
+				</label>
+				<label id="nutrient-saturated-fat">
+				</label>
+				<label id="nutrient-salt">
+				</label>
+				<label id="nutrient-sugars">
+				</label>
+			</div>
 		</main>
 
 		<footer>
