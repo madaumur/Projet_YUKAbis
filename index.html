@@ -6,19 +6,82 @@
 		<meta name="viewport" content="width=device-width" />
 		<title>Projet YUKAbis</title>
 		<meta name="author" content="madaumur" />
-		<meta name="description" content="" />
+		<meta
+			name="description"
+			content="Projet AFPA de la réalisation d'un site donnant les informations de produits alimentires en se basant sur l'API d'OpenFoodFact"
+		/>
 
 		<link rel="stylesheet" href="./styles/style.css" />
 	</head>
 
 	<body>
 		<header>
-			<div id="container_h1"></div>
+			<div id="container-h1">
+				<h1>YUKA<em>bis</em></h1>
+				<div id="container-h1-A">
+					<input
+						type="text"
+						placeholder="Entrer un code barre"
+						id="barecode-field"
+					/>
+				</div>
+			</div>
 		</header>
 
 		<main>
-			<div id="container-b1"></div>
-			<div id="container-b2"></div>
+			<hr />
+
+			<div id="container-b1">
+				<div id="container-b1-A">
+					<img
+						id="product-image"
+						alt=""
+						title="illustration du produit recherché"
+						src="https://via.placeholder.com/350.jpg"
+					/>
+				</div>
+				<div id="container-b1-B">
+					<label id="product-brand">Marque du produit</label>
+					<label id="product-name">Nom du produit</label>
+					<label id="product-quantity">Poids du produit</label>
+				</div>
+			</div>
+
+			<hr />
+
+			<div id="container-b2">
+				<div id="container-b2-A">
+					<label>Nutriscore : </label>
+					<img
+						id="nutri-image"
+						alt=""
+						title="Nutriscore du produit recherché"
+						src="/ressources/nutriscore/nutriscore-default.svg"
+					/>
+				</div>
+				<div id="container-b2-B">
+					<label>Novascore : </label>
+					<img
+						id="nova-image"
+						alt=""
+						title="Novascore du produit recherché"
+						src="/ressources/novascore/novascore-default.svg"
+					/>
+				</div>
+				<div id="container-b2-C">
+					<label>Ecoscore : </label>
+					<img
+						id="eco-image"
+						alt=""
+						title="Ecoscore du produit recherché"
+						src="/ressources/ecoscore/ecoscore-default.svg"
+					/>
+				</div>
+			</div>
+
+			<hr />
+
+			<div id="container-b3"></div>
 		</main>
 
 		<footer>
