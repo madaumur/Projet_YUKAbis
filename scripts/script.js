@@ -55,12 +55,10 @@
 		// Gestion du nom du produit
 		get_product_name(data);
 		product_quantity.innerHTML = data.product.quantity;
-		product_image.setAttribute(
-			"src",
-			data.product.selected_images.front.small.fr
-		);
+		product_image.setAttribute("src", data.product.image_front_url);
 
 		// Panel - Nutrition facts
+		get_veggie_status(data);
 		get_nutriscore(data);
 		get_novascore(data);
 		get_ecoscore(data);
@@ -77,13 +75,30 @@
 	}
 
 	function get_product_name(data) {
-		if (data.product.product_name_fr != "") {
-			product_name.innerHTML = data.product.product_name_fr;
-		} else {
+		if (data.product.product_name != "") {
 			product_name.innerHTML = data.product.product_name;
+		} else if (data.product.product_name_en != "") {
+			product_name.innerHTML = data.product.product_name_en;
+		} else if (data.product.generic_name != "") {
+			product_name.innerHTML = data.product.generic_name;
+		} else if (data.product.generic_name_en != "") {
+			product_name.innerHTML = data.product.generic_name_en;
+		} else if (data.product.product_name_fr != "") {
+			product_name.innerHTML = data.product.product_name_fr;
+		} else if (data.product.generic_name_fr != "") {
+			product_name.innerHTML = data.product.generic_name_fr;
 		}
 	}
 
+	function get_veggie_status(data) {
+		var veggie = document.querySelector("#veggie-image");
+
+		if (data.product.ingredients_analysis_tags[2] == "en:vegetarian") {
+			veggie.style.display = "flex";
+		} else {
+			veggie.style.display = "none";
+		}
+	}
 	function get_nutriscore(data) {
 		switch (data.product.nutriscore_grade) {
 			case "a":
@@ -378,6 +393,8 @@
 				data.product.nutriments["alcohol_100g"] +
 				" " +
 				data.product.nutriments["alcohol_unit"];
+		} else {
+			alcohol.style.display = "none";
 		}
 
 		/* FRUIT / VEGETABLE */
@@ -410,8 +427,6 @@
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 	/*                            INITIALIZE                        */
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
-
-	fetch_product_by_bc("3017620422003");
 
 	var accordeon = document.getElementsByClassName("accordeon");
 	var i;
