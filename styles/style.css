@@ -2,7 +2,11 @@
 html body {
 	background-color: #2b2b2b;
 	color: #d6d6d6;
+
 	font-family: Arial, Helvetica, sans-serif;
+
+	display: flex;
+	flex-direction: column;
 }
 
 em {
@@ -25,7 +29,15 @@ input:focus {
 	color: #eb9a9a;
 }
 
-/*-Header---------------------------------------------------------*/
+/*-Main-----------------------------------------------------------*/
+main {
+	align-self: center;
+	width: 80%;
+	max-width: 800px;
+	padding-bottom: 50px;
+}
+
+/*-Main_Header----------------------------------------------------*/
 #container-h1 {
 	width: 100%;
 	display: flex;
@@ -62,8 +74,7 @@ input:focus {
 	border-bottom: #75d84e 1px solid;
 }
 
-/*-Main-----------------------------------------------------------*/
-/*------Container1 : infos produit--------------------------------*/
+/*-Main_Container1 : infos produit--------------------------------*/
 #container-b1 {
 	width: 100%;
 	height: 150px;
@@ -98,7 +109,7 @@ input:focus {
 	font-size: large;
 }
 
-/*-Main-Accordeon-------------------------------------------------*/
+/*-Main_Accordeon-------------------------------------------------*/
 .accordeon {
 	background-color: #2b2b2b;
 	color: #d6d6d6;
@@ -137,7 +148,7 @@ input:focus {
 	margin-left: 5px;
 }
 
-/*-Main-Accordeon-Container---------------------------------------*/
+/*-Main_Accordeon_Container---------------------------------------*/
 #container-b2,
 #container-b3,
 #container-b4,
@@ -154,7 +165,7 @@ input:focus {
 	font-size: medium;
 }
 
-/*-Main-Container2 : indicateurs----------------------------------*/
+/*-Main_Container2 : indicateurs----------------------------------*/
 #container-b2 {
 	flex-direction: row;
 	justify-content: center;
@@ -165,7 +176,7 @@ input:focus {
 	max-height: 50px;
 }
 
-/*-Main-Container3 : valeur au 100g-------------------------------*/
+/*-Main_Container3 : valeur au 100g-------------------------------*/
 #b3-A {
 	display: flex;
 	flex-direction: column;
@@ -177,7 +188,7 @@ input:focus {
 	padding-bottom: 1em;
 }
 
-/*-Main-Container4 : tableau des nutritions-----------------------*/
+/*-Main_Container4 : tableau des nutritions-----------------------*/
 #b4-A {
 	padding: 1em 10%;
 }
@@ -199,7 +210,7 @@ input:focus {
 	border: 2px solid #a1a1a1;
 }
 
-/*-Main-Container5 : liste des ingrédients_-----------------------*/
+/*-Main_Container5 : liste des ingrédients_-----------------------*/
 #b5-A {
 	display: flex;
 	flex-direction: column;
@@ -213,17 +224,47 @@ input:focus {
 	font-style: italic;
 }
 
-/*-Footer---------------------------------------------------------*/
-#container-f1 {
-	display: flex;
-	flex-direction: row;
+/*-Main_Container6 : Faite des dons-------------------------------*/
+#container-b6 {
+	margin: 2%;
+	text-align: center;
 
-	position: sticky;
+	border-radius: 30px;
+
+	font-size: small;
+
+	margin-bottom: 0;
+}
+
+#container-b6 a {
+	border-radius: 1000px;
+
+	cursor: pointer;
+
+	line-height: normal;
+
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	padding: 0.5rem 1.2rem;
+
+	background-color: #75d84e;
+	color: #2b2b2b;
+}
+
+/*-Footer---------------------------------------------------------*/
+footer {
+	background-color: #2b2b2b;
+	position: fixed;
+	padding: 1em;
+	width: 100%;
 	bottom: 0;
+	text-align: center;
 }
 
 #container-f1 a {
 	color: #d6d6d6;
+
 	text-decoration: none;
 	padding: 1em;
 }
