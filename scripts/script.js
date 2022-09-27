@@ -70,9 +70,10 @@
 		nutri_levels.forEach((element) => get_nutrient_level(data, element));
 
 		// Panel - Nutritional table
-		document.querySelector("#col-value-per-package").innerHTML =
-			"As sold per serving (" + data.product.serving_size + ")";
 		fill_table(data);
+
+		var ingr_list = document.querySelector("#ingre-list");
+		ingr_list.innerHTML = data.product.ingredients_text_with_allergens;
 	}
 
 	function get_product_name(data) {
@@ -283,29 +284,117 @@
 		/* ENERGY */
 		var energy = document.querySelector("#row_energy");
 
-		energy.childNodes[3].innerHTML =
-			data.product.nutriments["energy-kj_100g"] +
-			" " +
-			data.product.nutriments["energy-kj_unit"];
-
-		energy.childNodes[5].innerHTML =
-			data.product.nutriments["energy-kj_serving"] +
-			" " +
-			data.product.nutriments["energy-kj_unit"];
+		if (data.product.nutriments["energy-kj_100g"] != null) {
+			energy.childNodes[3].innerHTML =
+				data.product.nutriments["energy-kj_100g"] +
+				" " +
+				data.product.nutriments["energy-kj_unit"] +
+				" (" +
+				data.product.nutriments["energy-kcal_100g"] +
+				" " +
+				data.product.nutriments["energy-kcal_unit"] +
+				")";
+		}
 
 		/* FAT */
 		var fat = document.querySelector("#row_fat");
 
-		fat.childNodes[3].innerHTML =
-			data.product.nutriments["fat_100g"] +
-			" " +
-			data.product.nutriments["fat_unit"];
+		if (data.product.nutriments["fat_100g"] != null) {
+			fat.childNodes[3].innerHTML =
+				data.product.nutriments["fat_100g"] +
+				" " +
+				data.product.nutriments["fat_unit"];
+		}
 
-		fat.childNodes[5].innerHTML =
-			data.product.nutriments["fat_serving"] +
-			" " +
-			data.product.nutriments["fat_unit"];
+		/* SATURATED FAT */
+		var sat_fat = document.querySelector("#row_saturated-fat");
+
+		if (data.product.nutriments["saturated-fat_100g"] != null) {
+			sat_fat.childNodes[3].innerHTML =
+				data.product.nutriments["saturated-fat_100g"] +
+				" " +
+				data.product.nutriments["saturated-fat_unit"];
+		} else {
+			sat_fat.style.display = "none";
+		}
+
+		/* CARBOHYDRATES */
+		var carbo = document.querySelector("#row_carbohydrates");
+
+		if (data.product.nutriments["carbohydrates_100g"] != null) {
+			carbo.childNodes[3].innerHTML =
+				data.product.nutriments["carbohydrates_100g"] +
+				" " +
+				data.product.nutriments["carbohydrates_unit"];
+		}
+
+		/* SUGARS */
+		var sugars = document.querySelector("#row_sugars");
+
+		if (data.product.nutriments["sugars_100g"] != null) {
+			sugars.childNodes[3].innerHTML =
+				data.product.nutriments["sugars_100g"] +
+				" " +
+				data.product.nutriments["sugars_unit"];
+		} else {
+			sugars.style.display = "none";
+		}
+
+		/* FIBERS */
+		var fibers = document.querySelector("#row_fiber");
+
+		if (data.product.nutriments["fiber_100g"] != null) {
+			fibers.childNodes[3].innerHTML =
+				data.product.nutriments["fiber_100g"] +
+				" " +
+				data.product.nutriments["fiber_unit"];
+		}
+
+		/* PROTEINS */
+		var proteins = document.querySelector("#row_proteins");
+
+		if (data.product.nutriments["proteins_100g"] != null) {
+			proteins.childNodes[3].innerHTML =
+				data.product.nutriments["proteins_100g"] +
+				" " +
+				data.product.nutriments["proteins_unit"];
+		}
+
+		/* SALT */
+		var salt = document.querySelector("#row_salt");
+
+		if (data.product.nutriments["salt_100g"] != null) {
+			salt.childNodes[3].innerHTML =
+				data.product.nutriments["salt_100g"] +
+				" " +
+				data.product.nutriments["salt_unit"];
+		}
+
+		/* ALCOHOL */
+		var alcohol = document.querySelector("#row_alcohol");
+
+		if (data.product.nutriments["alcohol_100g"] != null) {
+			alcohol.childNodes[3].innerHTML =
+				data.product.nutriments["alcohol_100g"] +
+				" " +
+				data.product.nutriments["alcohol_unit"];
+		}
+
+		/* FRUIT / VEGETABLE */
+		var fruit = document.querySelector("#row_fruit");
+
+		if (
+			data.product.nutriments[
+				"fruits-vegetables-nuts-estimate-from-ingredients_100g"
+			] != null
+		) {
+			fruit.childNodes[3].innerHTML =
+				data.product.nutriments[
+					"fruits-vegetables-nuts-estimate-from-ingredients_100g"
+				] + " %";
+		}
 	}
+
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 	/*                            LISTENERS                      	*/
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -321,6 +410,8 @@
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 	/*                            INITIALIZE                        */
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
+
+	fetch_product_by_bc("3017620422003");
 
 	var accordeon = document.getElementsByClassName("accordeon");
 	var i;

@@ -21,6 +21,10 @@ input:focus {
 	border-bottom: #75d84e 1px solid;
 }
 
+.allergen {
+	color: #eb9a9a;
+}
+
 /*-Header---------------------------------------------------------*/
 #container-h1 {
 	width: 100%;
@@ -91,6 +95,7 @@ input:focus {
 
 #container-b1-B label {
 	padding-bottom: 1em;
+	font-size: large;
 }
 
 /*-Main-Accordeon-------------------------------------------------*/
@@ -99,7 +104,7 @@ input:focus {
 	color: #d6d6d6;
 
 	cursor: pointer;
-	padding: 15px;
+	padding: 1em;
 	width: 100%;
 
 	text-align: left;
@@ -109,19 +114,19 @@ input:focus {
 	outline: none;
 }
 
+.accordeon:hover {
+	background-color: #2e2e2e;
+	color: #75d84e;
+}
+
 .accordeon:after {
 	content: "⮟";
 	color: #d6d6d6;
 	float: right;
-	margin-left: 5px;
 }
 
 .active {
 	border-bottom: none;
-}
-
-.active,
-.accordeon:hover {
 	color: #75d84e;
 }
 
@@ -132,61 +137,97 @@ input:focus {
 	margin-left: 5px;
 }
 
-/*-Main-Container2 : indicateurs----------------------------------*/
-#container-b2 {
+/*-Main-Accordeon-Container---------------------------------------*/
+#container-b2,
+#container-b3,
+#container-b4,
+#container-b5 {
 	overflow: hidden;
 	display: none;
 	flex-direction: column;
 	align-items: left;
-	padding-bottom: 15px;
+
+	padding-bottom: 1em;
 	border-bottom: #d6d6d6 1px solid;
+
+	text-align: left;
+	font-size: medium;
 }
 
-#container-b2-A,
-#container-b2-B,
-#container-b2-C {
-	max-height: 50px;
-	padding: 0.5em 2em 0.5em 2em;
-
-	display: flex;
+/*-Main-Container2 : indicateurs----------------------------------*/
+#container-b2 {
 	flex-direction: row;
+	justify-content: center;
 }
 
-#container-b2 label {
-	display: block;
-	width: 125px;
+#container-b2 img {
+	padding: 1em;
+	max-height: 50px;
 }
 
 /*-Main-Container3 : valeur au 100g-------------------------------*/
-#container-b3 {
-	overflow: hidden;
-	display: none;
+#b3-A {
+	display: flex;
 	flex-direction: column;
 	align-items: left;
-	padding-bottom: 15px;
-	border-bottom: #d6d6d6 1px solid;
+	padding: 1em 5%;
 }
 
-#container-b3 label {
-	padding: 0.5em 2em 0.5em 2em;
+#b3-A label {
+	padding-bottom: 1em;
 }
 
 /*-Main-Container4 : tableau des nutritions-----------------------*/
-#container-b4 {
-	overflow: hidden;
-	display: none;
-	flex-direction: column;
-	align-items: left;
-	padding-bottom: 15px;
-	border-bottom: #d6d6d6 1px solid;
+#b4-A {
+	padding: 1em 10%;
 }
 
-table {
+#b4-A table {
 	border-collapse: collapse;
 }
 
-table,
-td,
-th {
-	border: 1px solid #d6d6d6;
+#b4-A table,
+#b4-A td,
+#b4-A th {
+	padding: 0.4em 1em;
+	border: 1px solid #8f8f8f;
+}
+
+#b4-A thead,
+#b4-A thead th {
+	background-color: #242424;
+	border: 2px solid #a1a1a1;
+}
+
+/*-Main-Container5 : liste des ingrédients_-----------------------*/
+#b5-A {
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	padding: 1em 5%;
+}
+
+#ingre-list-notice {
+	padding-top: 1.5em;
+	font-size: small;
+	font-style: italic;
+}
+
+/*-Footer---------------------------------------------------------*/
+#container-f1 {
+	display: flex;
+	flex-direction: row;
+
+	position: sticky;
+	bottom: 0;
+}
+
+#container-f1 a {
+	color: #d6d6d6;
+	text-decoration: none;
+	padding: 1em;
+}
+
+#container-f1 a:hover {
+	color: #75d84e;
 }

@@ -20,7 +20,7 @@
 				<h1>YUKA<em>bis</em></h1>
 				<div id="container-h1-A">
 					<input
-						type="text"
+						type="search"
 						placeholder="Entrer un code barre"
 						id="barecode-field"
 					/>
@@ -47,126 +47,118 @@
 
 			<button class="accordeon">Nutrition facts</button>
 			<div id="container-b2">
-				<div id="container-b2-A">
-					<label>Nutriscore : </label>
-					<img
-						id="nutri-image"
-						alt="NutriScore introuvable"
-						title="NutriScore du produit recherché"
-						src="/ressources/nutriscore/nutriscore-default.svg"
-					/>
-				</div>
-				<div id="container-b2-B">
-					<label>Novascore : </label>
-					<img
-						id="nova-image"
-						alt="Score NOVA introuvable"
-						title="Score NOVA du produit recherché"
-						src="/ressources/novascore/novascore-default.svg"
-					/>
-				</div>
-				<div id="container-b2-C">
-					<label>Ecoscore : </label>
-					<img
-						id="eco-image"
-						alt="EcoScore introuvable"
-						title="EcoScore du produit recherché"
-						src="/ressources/ecoscore/ecoscore-default.svg"
-					/>
-				</div>
+				<img
+					id="nutri-image"
+					alt="NutriScore introuvable"
+					title="NutriScore du produit recherché"
+					src="/ressources/nutriscore/nutriscore-default.svg"
+				/>
+				<img
+					id="nova-image"
+					alt="Score NOVA introuvable"
+					title="Score NOVA du produit recherché"
+					src="/ressources/novascore/novascore-default.svg"
+				/>
+				<img
+					id="eco-image"
+					alt="EcoScore introuvable"
+					title="EcoScore du produit recherché"
+					src="/ressources/ecoscore/ecoscore-default.svg"
+				/>
 			</div>
 
 			<button class="accordeon">Nutrient levels for 100 g</button>
 			<div id="container-b3">
-				<label id="nutrient-fat"></label>
-				<label id="nutrient-saturated-fat"></label>
-				<label id="nutrient-salt"></label>
-				<label id="nutrient-sugars"></label>
+				<div id="b3-A">
+					<label id="nutrient-fat"></label>
+					<label id="nutrient-saturated-fat"></label>
+					<label id="nutrient-salt"></label>
+					<label id="nutrient-sugars"></label>
+				</div>
 			</div>
 
 			<button class="accordeon">Nutritional table</button>
 			<div id="container-b4">
-				<table>
-					<colgroup>
-						<col span="1" class="col-name" />
-						<col span="1" class="col2" />
-					</colgroup>
-					<thead>
-						<tr>
-							<th id="col-name" scope="col">Nutrition facts</th>
-							<th id="col-value-per-100" scope="col">
-								As sold for 100 g / 100 ml
-							</th>
-							<th id="col-value-per-package" scope="col">
-								As sold per serving (15g)
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr id="row_energy">
-							<th>Energy</th>
-							<th>null</th>
-							<th>null</th>
-						</tr>
-						<tr id="row_fat">
-							<th>Fat</th>
-							<th>null</th>
-							<th>null</th>
-						</tr>
-						<tr id="row_saturated-fat">
-							<th>incl. Saturated Fat</th>
-							<th>null</th>
-							<th>null</th>
-						</tr>
-						<tr id="row_carbohydrates">
-							<th>Carbohydrates</th>
-							<th>null</th>
-							<th>null</th>
-						</tr>
-						<tr id="row_sugars">
-							<th>incl. Sugars</th>
-							<th>null</th>
-							<th>null</th>
-						</tr>
-						<tr id="row_fiber">
-							<th>Fiber</th>
-							<th>null</th>
-							<th>null</th>
-						</tr>
-						<tr id="row_proteins">
-							<th>Proteins</th>
-							<th>null</th>
-							<th>null</th>
-						</tr>
-						<tr id="row_salt">
-							<th>Salt</th>
-							<th>null</th>
-							<th>null</th>
-						</tr>
-						<tr id="row_alcohol">
-							<th>Alcohol</th>
-							<th>null</th>
-							<th>null</th>
-						</tr>
-						<tr id="row_fruit">
-							<th>
-								Fruits‚ vegetables‚ nuts and rapeseed‚ walnut
-								and olive oils (estimatetion)
-							</th>
-							<th>null</th>
-							<th>null</th>
-						</tr>
-					</tbody>
-				</table>
+				<div id="b4-A">
+					<table>
+						<thead>
+							<tr>
+								<th id="col-name" scope="col">
+									Nutrition facts
+								</th>
+								<th id="col-value-per-100" scope="col">
+									As sold for 100 g / 100 ml
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="row_energy">
+								<th>Energy</th>
+								<th>no data</th>
+							</tr>
+							<tr id="row_fat">
+								<th>Fat</th>
+								<th>no data</th>
+							</tr>
+							<tr id="row_saturated-fat">
+								<th>incl. Saturated Fat</th>
+								<th>no data</th>
+							</tr>
+							<tr id="row_carbohydrates">
+								<th>Carbohydrates</th>
+								<th>no data</th>
+							</tr>
+							<tr id="row_sugars">
+								<th>incl. Sugars</th>
+								<th>no data</th>
+							</tr>
+							<tr id="row_fiber">
+								<th>Fiber</th>
+								<th>no data</th>
+							</tr>
+							<tr id="row_proteins">
+								<th>Proteins</th>
+								<th>no data</th>
+							</tr>
+							<tr id="row_salt">
+								<th>Salt</th>
+								<th>no data</th>
+							</tr>
+							<tr id="row_alcohol">
+								<th>Alcohol</th>
+								<th>no data</th>
+							</tr>
+							<tr id="row_fruit">
+								<th>
+									Fruits‚ vegetables‚ nuts and rapeseed‚
+									walnut and olive oils (estimatetion)
+								</th>
+								<th>no data</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 
 			<button class="accordeon">Ingredients</button>
-			<div id="container-b5"></div>
+			<div id="container-b5">
+				<div id="b5-A">
+					<div id="ingre-list"></div>
+					<div id="ingre-list-notice">
+						<span class="allergen">Red ingredients</span> are
+						potential allergen.
+					</div>
+				</div>
+			</div>
 		</main>
 
 		<footer>
-			<div id="container-f1"></div>
+			<div id="container-f1">
+				<a title="Who we are" href="#">Who we are ?</a>
+				<a title="Contact" href="#">Contact</a>
+			</div>
 		</footer>
+
 		<script src="./scripts/script.js"></script>
 	</body>
 </html>
