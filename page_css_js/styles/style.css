@@ -73,13 +73,13 @@ main {
 	border-style: none;
 }
 
-#barecode-field {
+#barcode-field {
 	width: 70%;
 	border-bottom: #d6d6d6 1px solid;
 	text-align: center;
 }
 
-#barecode-field:focus {
+#barcode-field:focus {
 	outline: none;
 	border-bottom: #75d84e 1px solid;
 }
