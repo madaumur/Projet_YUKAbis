@@ -1,2 +1,8 @@
-node_modules
+### A enlever des commentaires pour la version prod
+
 .vscode
+.editorconfig
+.prettierignore
+.prettierrc
+node_modules
+
