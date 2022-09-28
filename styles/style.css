@@ -87,14 +87,16 @@ main {
 /*-Main_Container1 : infos produit--------------------------------*/
 #container-b1 {
 	width: 100%;
-	max-height: 250px;
+
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 
 #container-b1-A {
 	max-height: 200px;
-	width: 30%;
+	width: 20%;
 	padding: 1em 1em 1em 1em;
 }
 
@@ -104,19 +106,18 @@ main {
 }
 
 #container-b1-B {
-	width: 70%;
-	padding: 1em 1em 1em 0;
+	width: 60%;
+	padding: 1em 1em 1em 1em;
 
 	display: flex;
 	flex-direction: column;
 	align-items: left;
-
-	font-weight: bold;
 }
 
 #container-b1-B label {
-	padding-bottom: 1em;
+	padding-bottom: 10%;
 	font-size: large;
+	font-weight: bold;
 }
 
 /*-Main_Accordeon-------------------------------------------------*/
