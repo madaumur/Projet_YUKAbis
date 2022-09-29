@@ -1,0 +1,38 @@
+/* Colors
+
+gray - #2b2b2b
+green - #75d84e
+white - #d6d6d6
+red - #eb9a9a
+
+/*-General--------------------------------------------------------*/
+html {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+em {
+	color: #75d84e;
+}
+
+.allergen {
+	color: #eb9a9a;
+}
+
+/*-Main-----------------------------------------------------------*/
+main {
+}
+
+#product-searchfield {
+	border: none;
+	border-bottom: #d6d6d6 1px solid;
+	text-align: center;
+}
+
+#product-searchfield:focus {
+	outline: none;
+	border-bottom: #75d84e 1px solid;
+}
+
+.accordion-header {
+	color: red;
+}

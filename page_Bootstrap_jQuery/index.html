@@ -11,91 +11,327 @@
 			content="Projet AFPA de la réalisation d'un site donnant les informations de produits alimentires en se basant sur l'API d'OpenFoodFact"
 		/>
 
-		<script
-			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-			crossorigin="anonymous"
-		></script>
-
 		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
 			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
 			crossorigin="anonymous"
 		/>
+		<link rel="stylesheet" href="./styles/style.css" />
 	</head>
 
-	<body class="">
+	<body class="bg-dark text-light">
 		<header></header>
 
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-auto">
-					<h1>YUKA<em>bis</em></h1>
-					<label>based on Open Food Facts</label>
+		<div class="row justify-content-md-center">
+			<div class="col-sm-12 col-md-10 col-lg-8" style="max-width: 900px">
+				<div class="container mt-5">
+					<div class="row justify-content-center">
+						<div class="col-auto">
+							<h1 class="mb-0">YUKA<em>bis</em></h1>
+							<label>based on Open Food Facts</label>
+						</div>
+					</div>
 				</div>
+
+				<div class="container mt-3">
+					<div class="row justify-content-center">
+						<input
+							class="col-auto bg-dark text-light"
+							id="product-searchfield"
+							type="search"
+							placeholder="Enter a barcoode"
+						/>
+					</div>
+				</div>
+
+				<div class="container mt-5">
+					<div class="row">
+						<div class="col-sm-12 col-md-4 col-lg-4 p-5 pt-0 pb-0">
+							<img
+								id="product_icon"
+								class="figure-img img-fluid rounded"
+								style="max-height: 200px"
+								alt=""
+								title="illustration du produit recherché"
+								src="https://via.placeholder.com/350.jpg"
+							/>
+						</div>
+						<div class="col-sm-12 col-md-8 col-lg-8 p-5 pt-0 pb-0">
+							<label
+								class="row justify-content-left"
+								id="product-brand"
+							>
+								product brand
+							</label>
+							<label
+								class="row justify-content-left"
+								id="product-name"
+							>
+								product name
+							</label>
+							<label
+								class="row justify-content-left"
+								id="product-quantity"
+							>
+								product quantity
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="container mt-5">
+					<div class="accordion" id="accordionPanelsStayOpenExample">
+						<div class="accordion-item border-0">
+							<h1
+								class="accordion-header bg-dark text-light"
+								id="panelsStayOpen-headingOne"
+							>
+								<button
+									class="accordion-button bg-dark text-light"
+									data-bs-toggle="collapse"
+									data-bs-target="#panelsStayOpen-collapseOne"
+								>
+									Nutrition facts
+								</button>
+							</h1>
+							<div
+								id="panelsStayOpen-collapseOne"
+								class="accordion-collapse collapse show bg-dark text-light"
+							>
+								<div class="accordion-body">
+									<div class="row justify-content-center">
+										<div class="col-auto p-2">
+											<div class="card">
+												<img
+													class="card-img"
+													style="max-height: 75px"
+													src="/ressources/nutriscore/nutriscore-default.svg"
+													alt="Nutriscore Default Icon"
+												/>
+											</div>
+										</div>
+										<div class="col-auto p-2">
+											<div class="card">
+												<img
+													class="card-img"
+													style="max-height: 75px"
+													src="/ressources/novascore/novascore-default.svg"
+													alt="Novascore Default Icon"
+												/>
+											</div>
+										</div>
+										<!-- Gallery Item 4 -->
+										<div class="col-auto p-2">
+											<div class="card">
+												<img
+													class="card-img"
+													style="max-height: 75px"
+													src="/ressources/ecoscore/ecoscore-default.svg"
+													alt="Ecoscore Default Icon"
+												/>
+											</div>
+										</div>
+										<div class="col-auto p-2">
+											<div class="card">
+												<img
+													class="card-img"
+													style="max-height: 75px"
+													src="/ressources/icons/vegetarian.png"
+													alt="Vegetarian Default Icon"
+												/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item border-0">
+							<h1
+								class="accordion-header"
+								id="panelsStayOpen-headingTwo"
+							>
+								<button
+									class="accordion-button bg-dark text-light"
+									type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#panelsStayOpen-collapseTwo"
+								>
+									Nutrient levels for 100 g
+								</button>
+							</h1>
+							<div
+								id="panelsStayOpen-collapseTwo"
+								class="accordion-collapse collapse show p-5 pt-3 pb-3 bg-dark text-light"
+							>
+								<div id="container mt-5 ">
+									<div class="row bg-dark text-light">
+										<label class="pl-5" id="nutrient-fat"
+											>fat level</label
+										>
+										<label id="nutrient-saturated-fat"
+											>sat fat level</label
+										>
+										<label id="nutrient-salt"
+											>salt level</label
+										>
+										<label id="nutrient-sugars"
+											>suger level</label
+										>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item border-0">
+							<h1
+								class="accordion-header"
+								id="panelsStayOpen-headingThree"
+							>
+								<button
+									class="accordion-button bg-dark text-light"
+									type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#panelsStayOpen-collapseThree"
+								>
+									Nutrient table
+								</button>
+							</h1>
+							<div
+								id="panelsStayOpen-collapseThree"
+								class="accordion-collapse collapse show p-5 pt-3 pb-3 bg-dark text-light"
+							>
+								<table
+									class="table table-bordered table-dark table-sm"
+								>
+									<caption>
+										Nutritional table
+									</caption>
+									<thead>
+										<tr>
+											<th id="col-name" scope="col">
+												Nutrition facts
+											</th>
+											<th
+												id="col-value-per-100"
+												scope="col"
+											>
+												As sold for 100g / 100ml
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr scope="row" id="row_energy">
+											<td>Energy</td>
+											<td>no data</td>
+										</tr>
+										<tr scope="row" id="row_fat">
+											<td>Fat</td>
+											<td>no data</td>
+										</tr>
+										<tr scope="row" id="row_saturated-fat">
+											<td>incl. Saturated Fat</td>
+											<td>no data</td>
+										</tr>
+										<tr scope="row" id="row_carbohydrates">
+											<td>Carbohydrates</td>
+											<td>no data</td>
+										</tr>
+										<tr scope="row" id="row_sugars">
+											<td>incl. Sugars</td>
+											<td>no data</td>
+										</tr>
+										<tr scope="row" id="row_fiber">
+											<td>Fiber</td>
+											<td>no data</td>
+										</tr>
+										<tr scope="row" id="row_proteins">
+											<td>Proteins</td>
+											<td>no data</td>
+										</tr>
+										<tr scope="row" id="row_salt">
+											<td>Salt</td>
+											<td>no data</td>
+										</tr>
+										<tr scope="row" id="row_alcohol">
+											<td>Alcohol</td>
+											<td>no data</td>
+										</tr>
+										<tr scope="row" id="row_fruit">
+											<td>
+												Fruits‚ vegetables‚ nuts and
+												rapeseed‚ walnut and olive oils
+												(estimatetion)
+											</td>
+											<td>no data</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="accordion-item border-0">
+							<h1
+								class="accordion-header"
+								id="panelsStayOpen-headingFour"
+							>
+								<button
+									class="accordion-button bg-dark text-light"
+									type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#panelsStayOpen-collapseFour"
+								>
+									Ingredients
+								</button>
+							</h1>
+							<div
+								id="panelsStayOpen-collapseFour"
+								class="accordion-collapse collapse show p-5 pt-3 pb-3 bg-dark text-light"
+							>
+								<div id="container mt-5 ">
+									<div class="row bg-dark text-light">
+										<p>
+											Lorem ipsum dolor sit amet
+											consectetur adipisicing elit.
+											Reprehenderit, cumque quaerat nobis
+											accusantium aperiam eius distinctio
+											minima blanditiis, asperiores
+											quibusdam, porro sapiente maxime
+											necessitatibus? Aliquid unde facilis
+											error adipisci accusantium.
+										</p>
+										<p class="" style="font-style: italic">
+											<span
+												class="allergen"
+												style="color: #eb9a9a"
+												>Red ingredients</span
+											>
+											are potential allergen.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<footer class="container">
+					<div class="col">
+						<a
+							title="Who we are"
+							href="https://world.openfoodfacts.org/who-we-are"
+							>Open food facts</a
+						>
+						<a title="Contact" href="#">Contact</a>
+						<a href="../index.html">Home </a>
+						<a title="Top" href="#">↑</a>
+					</div>
+				</footer>
 			</div>
 		</div>
 
-		<div class="container">
-			<div class="row justify-content-center">
-				<input
-					id="product-searchfield"
-					type="search"
-					placeholder="Entrer un code barre"
-				/>
-			</div>
-		</div>
-
-		<div class="container">
-			<div class="row">
-				<div class="col-3">
-					<img
-						id="product_icon"
-						class="w-100"
-						alt=""
-						title="illustration du produit recherché"
-						src="https://via.placeholder.com/350.jpg"
-					/>
-				</div>
-				<div class="col-9">
-					<label class="row justify-content-left" id="product-brand">
-						product brand
-					</label>
-					<label class="row justify-content-left" id="product-name">
-						product name
-					</label>
-					<label
-						class="row justify-content-left"
-						id="product-quantity"
-					>
-						product quantity
-					</label>
-				</div>
-			</div>
-		</div>
-
-		<footer>
-			<div id="container-f1">
-				<a
-					title="Who we are"
-					href="https://world.openfoodfacts.org/who-we-are"
-					>Open food facts</a
-				>
-				<a title="Contact" href="#">Contact</a>
-				<a href="../index.html">Home </a>
-				<a title="Top" href="#">↑</a>
-			</div>
-		</footer>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+			crossorigin="anonymous"
+		></script>
 	</body>
 </html>
