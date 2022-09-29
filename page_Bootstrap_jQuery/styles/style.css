@@ -5,6 +5,8 @@ green - #75d84e
 white - #d6d6d6
 red - #eb9a9a
 
+*/
+
 /*-General--------------------------------------------------------*/
 html {
 	font-family: Arial, Helvetica, sans-serif;
@@ -16,6 +18,13 @@ em {
 
 .allergen {
 	color: #eb9a9a;
+}
+
+#subtitle {
+	width: 100%;
+	text-align: center;
+	font-style: italic;
+	font-size: x-small;
 }
 
 /*-Main-----------------------------------------------------------*/
@@ -33,6 +42,6 @@ main {
 	border-bottom: #75d84e 1px solid;
 }
 
-.accordion-header {
-	color: red;
+.accordion-button::after {
+	color: white;
 }

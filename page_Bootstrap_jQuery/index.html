@@ -29,12 +29,14 @@
 					<div class="row justify-content-center">
 						<div class="col-auto">
 							<h1 class="mb-0">YUKA<em>bis</em></h1>
-							<label>based on Open Food Facts</label>
+							<label id="subtitle"
+								>based on Open Food Facts</label
+							>
 						</div>
 					</div>
 				</div>
 
-				<div class="container mt-3">
+				<div class="container mt-5">
 					<div class="row justify-content-center">
 						<input
 							class="col-auto bg-dark text-light"
@@ -84,7 +86,7 @@
 					<div class="accordion" id="accordionPanelsStayOpenExample">
 						<div class="accordion-item border-0">
 							<h1
-								class="accordion-header bg-dark text-light"
+								class="accordion-header"
 								id="panelsStayOpen-headingOne"
 							>
 								<button
@@ -102,43 +104,46 @@
 								<div class="accordion-body">
 									<div class="row justify-content-center">
 										<div class="col-auto p-2">
-											<div class="card">
+											<div class="card bg-dark">
 												<img
 													class="card-img"
 													style="max-height: 75px"
 													src="/ressources/nutriscore/nutriscore-default.svg"
 													alt="Nutriscore Default Icon"
+													id="nutri-image"
 												/>
 											</div>
 										</div>
 										<div class="col-auto p-2">
-											<div class="card">
+											<div class="card bg-dark">
 												<img
 													class="card-img"
 													style="max-height: 75px"
 													src="/ressources/novascore/novascore-default.svg"
 													alt="Novascore Default Icon"
+													id="nova-image"
 												/>
 											</div>
 										</div>
-										<!-- Gallery Item 4 -->
 										<div class="col-auto p-2">
-											<div class="card">
+											<div class="card bg-dark">
 												<img
 													class="card-img"
 													style="max-height: 75px"
 													src="/ressources/ecoscore/ecoscore-default.svg"
 													alt="Ecoscore Default Icon"
+													id="eco-image"
 												/>
 											</div>
 										</div>
 										<div class="col-auto p-2">
-											<div class="card">
+											<div class="card bg-dark">
 												<img
 													class="card-img"
 													style="max-height: 75px"
 													src="/ressources/icons/vegetarian.png"
 													alt="Vegetarian Default Icon"
+													id="veggie-image"
 												/>
 											</div>
 										</div>
@@ -286,9 +291,9 @@
 								id="panelsStayOpen-collapseFour"
 								class="accordion-collapse collapse show p-5 pt-3 pb-3 bg-dark text-light"
 							>
-								<div id="container mt-5 ">
+								<div class="container mt-5">
 									<div class="row bg-dark text-light">
-										<p>
+										<p id="ingre-list">
 											Lorem ipsum dolor sit amet
 											consectetur adipisicing elit.
 											Reprehenderit, cumque quaerat nobis
@@ -333,5 +338,6 @@
 			integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
 			crossorigin="anonymous"
 		></script>
+		<script src="./scripts/script.js"></script>
 	</body>
 </html>
