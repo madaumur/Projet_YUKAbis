@@ -5,7 +5,7 @@
 	/*                            CONSTANTES                        */
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-	const barecodeField = document.querySelector('#barecode-field')
+	const barcodeField = document.querySelector('#barcode-field')
 
 	const productBrand = document.querySelector('#product-brand')
 	const productName = document.querySelector('#product-name')
@@ -25,14 +25,14 @@
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
 	// Construction de la requète à partir d'un code barre
-	function queryConstructor(barecode) {
-		return `https://world.openfoodfacts.org/api/v0/product/${barecode}.json`
+	function queryConstructor(barcode) {
+		return `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
 	}
 
 	// Aqcuisition des données à partir de l'api
-	function fetchProductByBC(barecode) {
+	function fetchProductByBC(barcode) {
 		// fetch - demande à l'API des infos produit correspondant au code barre
-		fetch(queryConstructor(barecode), { method: 'GET' })
+		fetch(queryConstructor(barcode), { method: 'GET' })
 			// On récuère la réponse dans un .JSON
 			.then((response) => {
 				if (!response.ok) {
@@ -233,7 +233,7 @@
 			case 'e':
 				ecoimage.setAttribute(
 					'src',
-					'/ressources/nutriscore/ecoscore-e.svg'
+					'/ressources/ecoscore/ecoscore-e.svg'
 				)
 				ecoimage.setAttribute('alt', 'EcoScore E')
 				ecoimage.setAttribute(
@@ -421,9 +421,9 @@
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
 	// Listener sur le champs de recherche de code barre
-	barecodeField.addEventListener('input', () => {
-		if (barecodeField.value.trim().length === 13) {
-			fetchProductByBC(barecodeField.value.trim())
+	barcodeField.addEventListener('input', () => {
+		if (barcodeField.value.trim().length === 13) {
+			fetchProductByBC(barcodeField.value.trim())
 		}
 	})
 
