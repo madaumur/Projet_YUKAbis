@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Projet YUKAbis</title>
+		<meta name="author" content="madaumur" />
+		<meta
+			name="description"
+			content="Projet AFPA de la réalisation d'un site donnant les informations de produits alimentires en se basant sur l'API d'OpenFoodFact"
+		/>
+
+		<link rel="stylesheet" href="./styles/style.css" />
+	</head>
+
+	<body>
+		<header></header>
+
+		<main>
+			<div id="container-title" class="container">
+				<h1>YUKA<em>bis</em></h1>
+				<label>based on Open Food Facts</label>
+				<div id="title-input">
+					<input
+						id="barcode-field"
+						type="search"
+						placeholder="Enter a barcoode"
+					/>
+				</div>
+			</div>
+
+			<div id="container-product" class="container">
+				<div id="product-image">
+					<img
+						id="front-image"
+						alt="front product image"
+						title="front product image"
+						src="https://via.placeholder.com/350.jpg"
+					/>
+				</div>
+				<div id="product-label">
+					<label id="product-brand">product brand</label>
+					<label id="product-name">product name</label>
+					<label id="product-quantity">product quantity</label>
+				</div>
+			</div>
+
+			<div id="container-accordion" class="container">
+				<div id="panel-one" class="panel">
+					<button id="panel-one-head" class="accordion">
+						Nutrition facts
+					</button>
+					<div id="panel-one-body" class="panel-body">
+						<img
+							id="nutri-image"
+							alt="Nutriscore unreachable"
+							title="Product's nutriscore"
+							src="/ressources/nutriscore/nutriscore-default.svg"
+						/>
+						<img
+							id="nova-image"
+							alt="NOVA score unreachable"
+							title="Product's NOVA score"
+							src="/ressources/novascore/novascore-default.svg"
+						/>
+						<img
+							id="eco-image"
+							alt="Ecoscore unreachable"
+							title="Product's ecoscore"
+							src="/ressources/ecoscore/ecoscore-default.svg"
+						/>
+						<img
+							id="veggie-image"
+							alt="Vegetarian status unreachable"
+							title="Product is vegetarian"
+							src="/ressources/icons/vegetarian.png"
+						/>
+					</div>
+				</div>
+				<div id="panel-two" class="panel">
+					<button id="panel-two-head" class="accordion">
+						Nutrient levels for 100 g
+					</button>
+					<div id="panel-two-body" class="panel-body">
+						<label id="nutrient-fat"></label>
+						<label id="nutrient-saturated-fat"></label>
+						<label id="nutrient-salt"></label>
+						<label id="nutrient-sugars"></label>
+					</div>
+				</div>
+				<div id="panel-three" class="panel">
+					<button id="panel-three-head" class="accordion">
+						Nutritional table
+					</button>
+					<div id="panel-three-body" class="panel-body">
+						<table>
+							<caption>
+								Nutritional table
+							</caption>
+							<thead>
+								<tr>
+									<th id="col-name" scope="col">
+										Nutrition facts
+									</th>
+									<th id="col-value-per-100" scope="col">
+										As sold for 100g / 100ml
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr id="row_energy">
+									<td>Energy</td>
+									<td>no data</td>
+								</tr>
+								<tr id="row_fat">
+									<td>Fat</td>
+									<td>no data</td>
+								</tr>
+								<tr id="row_saturated-fat">
+									<td>incl. Saturated Fat</td>
+									<td>no data</td>
+								</tr>
+								<tr id="row_carbohydrates">
+									<td>Carbohydrates</td>
+									<td>no data</td>
+								</tr>
+								<tr id="row_sugars">
+									<td>incl. Sugars</td>
+									<td>no data</td>
+								</tr>
+								<tr id="row_fiber">
+									<td>Fiber</td>
+									<td>no data</td>
+								</tr>
+								<tr id="row_proteins">
+									<td>Proteins</td>
+									<td>no data</td>
+								</tr>
+								<tr id="row_salt">
+									<td>Salt</td>
+									<td>no data</td>
+								</tr>
+								<tr id="row_alcohol">
+									<td>Alcohol</td>
+									<td>no data</td>
+								</tr>
+								<tr id="row_fruit">
+									<td>
+										Fruits‚ vegetables‚ nuts and rapeseed‚
+										walnut and olive oils (estimatetion)
+									</td>
+									<td>no data</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div id="panel-four" class="panel">
+					<button id="panel-four-head" class="accordion">
+						Ingredients
+					</button>
+					<div id="panel-four-body" class="panel-body">
+						<div id="ingre-list"></div>
+						<div id="ingre-list-notice">
+							<span class="allergen">Red ingredients</span>
+							are potential allergen.
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="container-donation" class="container">
+				<p>
+					<em>Important:</em> we need your support! Open Food Facts is
+					a collaborative project built by tens of thousands of
+					volunteers and managed by a non-profit organization with 4
+					employees. We need your donations to fund the Open Food
+					Facts 2022 budget and to continue to develop the project.
+					Thank you! ❤️
+				</p>
+				<a
+					href="https://world.openfoodfacts.org/donate-to-open-food-facts?utm_source=off&amp;utm_medium=web&amp;utm_campaign=donate-2022&amp;utm_term=en-text-button"
+					title="donation-button"
+				>
+					Donate
+				</a>
+			</div>
+		</main>
+
+		<footer>
+			<div id="container-footer">
+				<a
+					title="Who we are"
+					href="https://world.openfoodfacts.org/who-we-are"
+					>Open food facts</a
+				>
+				<a title="Contact" href="#">Contact</a>
+				<a href="../index.html">Home </a>
+				<a title="Top" href="#">↑</a>
+			</div>
+		</footer>
+
+		<script src="./scripts/script.js"></script>
+	</body>
+</html>

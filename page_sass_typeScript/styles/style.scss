@@ -1,0 +1,272 @@
+$font-stack: Arial, Helvetica, sans-serif;
+
+$primary-color: #d6d6d6;
+$secondary-color: #2b2b2b;
+$green-accent: #75d84e;
+$red-accent: #eb9a9a;
+$grey-accent: #8f8f8f;
+$darkgrey-accent: #242424;
+
+/*-General--------------------------------------------------------*/
+body {
+	font: 100% $font-stack;
+	color: $primary-color;
+	background-color: $secondary-color;
+
+	display: flex;
+	flex-direction: column;
+}
+
+em {
+	color: $green-accent;
+}
+
+.allergen {
+	color: $red-accent;
+}
+
+/*-Main-----------------------------------------------------------*/
+main {
+	align-self: center;
+	width: 80%;
+	max-width: 800px;
+	padding-bottom: 50px;
+
+	.container {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	/*-Main_Header----------------------------------------------------*/
+	#container-title {
+		h1 {
+			margin: 0;
+			margin-top: 5%;
+			width: 100%;
+			text-align: center;
+		}
+
+		label {
+			margin-bottom: 5%;
+			width: 100%;
+			text-align: center;
+			font-style: italic;
+			font-size: x-small;
+		}
+	}
+
+	#title-input {
+		width: 100%;
+		padding: 5% 0% 5% 0%;
+
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+
+		input {
+			width: 70%;
+			color: $primary-color;
+			background-color: $secondary-color;
+
+			border-style: none;
+			border-bottom: $primary-color 1px solid;
+
+			text-align: center;
+
+			&:focus {
+				outline: none;
+				border-bottom: $green-accent 1px solid;
+			}
+		}
+	}
+
+	/*-Main_Container1 : infos produit--------------------------------*/
+	#container-product {
+		flex-direction: row;
+		justify-content: center;
+		flex-wrap: wrap;
+
+		#product-image {
+			width: 25%;
+			max-height: 200px;
+			padding: 1em 1em 1em 1em;
+
+			img {
+				max-width: 100%;
+				max-height: 100%;
+			}
+		}
+
+		#product-label {
+			width: 65%;
+			padding: 1em 1em 1em 1em;
+
+			display: flex;
+			flex-direction: column;
+			align-items: left;
+
+			label {
+				padding-bottom: 1em;
+				font-size: large;
+				font-weight: bold;
+			}
+		}
+	}
+
+	/*-Main_Accordeon-------------------------------------------------*/
+	.accordion {
+		color: $primary-color;
+		background-color: $secondary-color;
+		cursor: pointer;
+
+		width: 100%;
+		padding: 1em;
+
+		text-align: left;
+		font-size: large;
+		border-style: none;
+		outline: none;
+
+		&:hover {
+			background-color: $secondary-color;
+			color: $green-accent;
+		}
+
+		&:after {
+			content: '⮟';
+			color: $primary-color;
+			float: right;
+		}
+	}
+
+	.active {
+		border-bottom: none;
+		color: $green-accent;
+
+		&:after {
+			content: '⮝';
+			color: $primary-color;
+			float: right;
+		}
+	}
+
+	.panel {
+		width: 100%;
+		text-align: left;
+		font-size: medium;
+
+		border-bottom: $primary-color 1px solid;
+
+		.panel-body {
+			overflow: hidden;
+			display: none;
+			flex-direction: column;
+			align-items: left;
+			padding-bottom: 2em;
+		}
+	}
+
+	/*-Main_Container2 : indicateurs----------------------------------*/
+	#panel-one-body {
+		flex-direction: row;
+		justify-content: center;
+		flex-wrap: wrap;
+
+		img {
+			padding: 1em;
+			max-height: 70px;
+		}
+
+		#veggie-image {
+			display: none;
+		}
+	}
+
+	/*-Main_Container3 : valeur au 100g-------------------------------*/
+	#panel-two-body {
+		flex-direction: column;
+		align-items: left;
+		padding-inline: 10%;
+
+		label {
+			padding-bottom: 1em;
+		}
+	}
+
+	/*-Main_Container4 : tableau des nutritions-----------------------*/
+	#panel-three-body {
+		padding-inline: 15%;
+
+		table {
+			border-collapse: collapse;
+		}
+
+		table,
+		td,
+		th {
+			padding: 0.5em 1em;
+			border: $grey-accent 1px solid;
+		}
+
+		thead,
+		thead th {
+			background-color: $darkgrey-accent;
+			border: $grey-accent 2px solid;
+		}
+	}
+
+	/*-Main_Container5 : liste des ingrédients_-----------------------*/
+	#panel-four-body {
+		padding-inline: 10%;
+	}
+
+	#ingre-list-notice {
+		margin-top: 2em;
+		font-size: small;
+		font-style: italic;
+	}
+
+	/*-Main_Container6 : Faite des dons-------------------------------*/
+	#container-donation {
+		margin-top: 2em;
+		margin-bottom: 0;
+		text-align: center;
+
+		font-size: small;
+
+		a {
+			border-radius: 1000px;
+
+			cursor: pointer;
+			text-decoration: none;
+			padding: 0.5rem 1.5rem;
+
+			background-color: $green-accent;
+			color: $secondary-color;
+		}
+	}
+}
+
+/*-Footer---------------------------------------------------------*/
+footer {
+	background-color: $secondary-color;
+	position: fixed;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	width: 100%;
+	bottom: 0;
+	text-align: center;
+
+	a {
+		color: $primary-color;
+
+		text-decoration: none;
+		padding: 1em;
+
+		&:hover {
+			color: $green-accent;
+		}
+	}
+}
