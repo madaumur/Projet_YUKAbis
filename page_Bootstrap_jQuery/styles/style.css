@@ -19,7 +19,9 @@ em {
 .allergen {
 	color: #eb9a9a;
 }
-
+#title {
+	font-weight: bold;
+}
 #subtitle {
 	width: 100%;
 	text-align: center;
@@ -28,9 +30,6 @@ em {
 }
 
 /*-Main-----------------------------------------------------------*/
-main {
-}
-
 #product-searchfield {
 	border: none;
 	border-bottom: #d6d6d6 1px solid;
@@ -42,6 +41,51 @@ main {
 	border-bottom: #75d84e 1px solid;
 }
 
-.accordion-button::after {
-	color: white;
+/*-Main_Accordeon-------------------------------------------------*/
+.accordion-button {
+	font-size: large;
+	border-style: none;
+	border-bottom: #d6d6d6 1px solid;
+	outline: none;
+}
+
+/*-Main_Donation--------------------------------------------------*/
+#help {
+	text-align: center;
+	font-size: small;
+	margin-bottom: 0;
+}
+
+#help a {
+	border-radius: 1000px;
+
+	cursor: pointer;
+
+	line-height: normal;
+
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	padding: 0.5rem 1.2rem;
+
+	background-color: #75d84e;
+	color: #2b2b2b;
+}
+
+/*-Footer---------------------------------------------------------*/
+footer {
+	width: 100%;
+	bottom: 0;
+	text-align: center;
+	padding: 1em;
+}
+
+footer a {
+	color: #d6d6d6;
+	text-decoration: none;
+	padding: 1em;
+}
+
+footer a:hover {
+	color: #75d84e;
 }

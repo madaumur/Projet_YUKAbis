@@ -28,7 +28,7 @@
 				<div class="container mt-5">
 					<div class="row justify-content-center">
 						<div class="col-auto">
-							<h1 class="mb-0">YUKA<em>bis</em></h1>
+							<h1 class="mb-0" id="title">YUKA<em>bis</em></h1>
 							<label id="subtitle"
 								>based on Open Food Facts</label
 							>
@@ -83,23 +83,21 @@
 					</div>
 				</div>
 
+				<!-- @TODO : essayez de changer la couleur des flèches et contour du bouton actif ( de bleu à vert ) -->
 				<div class="container mt-5">
 					<div class="accordion" id="accordionPanelsStayOpenExample">
 						<div class="accordion-item border-0">
-							<h1
-								class="accordion-header"
-								id="panelsStayOpen-headingOne"
-							>
+							<h1 class="accordion-header">
 								<button
 									class="accordion-button bg-dark text-light"
 									data-bs-toggle="collapse"
-									data-bs-target="#panelsStayOpen-collapseOne"
+									data-bs-target="#panelOne"
 								>
 									Nutrition facts
 								</button>
 							</h1>
 							<div
-								id="panelsStayOpen-collapseOne"
+								id="panelOne"
 								class="accordion-collapse collapse show bg-dark text-light"
 							>
 								<div class="accordion-body">
@@ -153,25 +151,22 @@
 							</div>
 						</div>
 						<div class="accordion-item border-0">
-							<h1
-								class="accordion-header"
-								id="panelsStayOpen-headingTwo"
-							>
+							<h1 class="accordion-header">
 								<button
 									class="accordion-button bg-dark text-light"
 									type="button"
 									data-bs-toggle="collapse"
-									data-bs-target="#panelsStayOpen-collapseTwo"
+									data-bs-target="#panelTwo"
 								>
 									Nutrient levels for 100 g
 								</button>
 							</h1>
 							<div
-								id="panelsStayOpen-collapseTwo"
-								class="accordion-collapse collapse show p-5 pt-3 pb-3 bg-dark text-light"
+								id="panelTwo"
+								class="accordion-collapse collapse hide bg-dark text-light"
 							>
-								<div id="container mt-5 ">
-									<div class="row bg-dark text-light">
+								<div class="accordion-body">
+									<div class="row p-5 pt-3 pb-3">
 										<label
 											class="p-2"
 											id="nutrient-fat"
@@ -193,122 +188,133 @@
 							</div>
 						</div>
 						<div class="accordion-item border-0">
-							<h1
-								class="accordion-header"
-								id="panelsStayOpen-headingThree"
-							>
+							<h1 class="accordion-header">
 								<button
 									class="accordion-button bg-dark text-light"
 									type="button"
 									data-bs-toggle="collapse"
-									data-bs-target="#panelsStayOpen-collapseThree"
+									data-bs-target="#panelThree"
 								>
 									Nutrient table
 								</button>
 							</h1>
 							<div
-								id="panelsStayOpen-collapseThree"
-								class="accordion-collapse collapse show p-5 pt-3 pb-3 bg-dark text-light"
+								id="panelThree"
+								class="accordion-collapse collapse hide bg-dark text-light"
 							>
-								<table
-									class="table table-bordered table-dark table-sm"
-								>
-									<caption>
-										Nutritional table
-									</caption>
-									<thead>
-										<tr>
-											<th id="col-name" scope="col">
-												Nutrition facts
-											</th>
-											<th
-												id="col-value-per-100"
-												scope="col"
-											>
-												As sold for 100g / 100ml
-											</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr scope="row" id="row_energy">
-											<td>Energy</td>
-											<td>no data</td>
-										</tr>
-										<tr scope="row" id="row_fat">
-											<td>Fat</td>
-											<td>no data</td>
-										</tr>
-										<tr scope="row" id="row_saturated-fat">
-											<td>incl. Saturated Fat</td>
-											<td>no data</td>
-										</tr>
-										<tr scope="row" id="row_carbohydrates">
-											<td>Carbohydrates</td>
-											<td>no data</td>
-										</tr>
-										<tr scope="row" id="row_sugars">
-											<td>incl. Sugars</td>
-											<td>no data</td>
-										</tr>
-										<tr scope="row" id="row_fiber">
-											<td>Fiber</td>
-											<td>no data</td>
-										</tr>
-										<tr scope="row" id="row_proteins">
-											<td>Proteins</td>
-											<td>no data</td>
-										</tr>
-										<tr scope="row" id="row_salt">
-											<td>Salt</td>
-											<td>no data</td>
-										</tr>
-										<tr scope="row" id="row_alcohol">
-											<td>Alcohol</td>
-											<td>no data</td>
-										</tr>
-										<tr scope="row" id="row_fruit">
-											<td>
-												Fruits‚ vegetables‚ nuts and
-												rapeseed‚ walnut and olive oils
-												(estimatetion)
-											</td>
-											<td>no data</td>
-										</tr>
-									</tbody>
-								</table>
+								<div class="accordion-body">
+									<div class="container p-5 pt-3 pb-3">
+										<table
+											class="table table-bordered table-dark table-sm"
+										>
+											<caption>
+												Nutritional table
+											</caption>
+											<thead>
+												<tr>
+													<th
+														id="col-name"
+														scope="col"
+													>
+														Nutrition facts
+													</th>
+													<th
+														id="col-value-per-100"
+														scope="col"
+													>
+														As sold for 100g / 100ml
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr scope="row" id="row_energy">
+													<td>Energy</td>
+													<td>no data</td>
+												</tr>
+												<tr scope="row" id="row_fat">
+													<td>Fat</td>
+													<td>no data</td>
+												</tr>
+												<tr
+													scope="row"
+													id="row_saturated-fat"
+												>
+													<td>incl. Saturated Fat</td>
+													<td>no data</td>
+												</tr>
+												<tr
+													scope="row"
+													id="row_carbohydrates"
+												>
+													<td>Carbohydrates</td>
+													<td>no data</td>
+												</tr>
+												<tr scope="row" id="row_sugars">
+													<td>incl. Sugars</td>
+													<td>no data</td>
+												</tr>
+												<tr scope="row" id="row_fiber">
+													<td>Fiber</td>
+													<td>no data</td>
+												</tr>
+												<tr
+													scope="row"
+													id="row_proteins"
+												>
+													<td>Proteins</td>
+													<td>no data</td>
+												</tr>
+												<tr scope="row" id="row_salt">
+													<td>Salt</td>
+													<td>no data</td>
+												</tr>
+												<tr
+													scope="row"
+													id="row_alcohol"
+												>
+													<td>Alcohol</td>
+													<td>no data</td>
+												</tr>
+												<tr scope="row" id="row_fruit">
+													<td>
+														Fruits‚ vegetables‚ nuts
+														and rapeseed‚ walnut and
+														olive oils
+														(estimatetion)
+													</td>
+													<td>no data</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="accordion-item border-0">
-							<h1
-								class="accordion-header"
-								id="panelsStayOpen-headingFour"
-							>
+							<h1 class="accordion-header">
 								<button
 									class="accordion-button bg-dark text-light"
 									type="button"
 									data-bs-toggle="collapse"
-									data-bs-target="#panelsStayOpen-collapseFour"
+									data-bs-target="#panelFour"
 								>
 									Ingredients
 								</button>
 							</h1>
 							<div
-								id="panelsStayOpen-collapseFour"
-								class="accordion-collapse collapse show p-5 pt-3 pb-3 bg-dark text-light"
+								id="panelFour"
+								class="accordion-collapse collapse hide bg-dark text-light"
 							>
-								<div class="container mt-5">
-									<div class="row bg-dark text-light">
-										<p id="ingre-list">
-											Lorem ipsum dolor sit amet
-											consectetur adipisicing elit.
-											Reprehenderit, cumque quaerat nobis
-											accusantium aperiam eius distinctio
-											minima blanditiis, asperiores
-											quibusdam, porro sapiente maxime
-											necessitatibus? Aliquid unde facilis
-											error adipisci accusantium.
-										</p>
-										<p class="" style="font-style: italic">
+								<div class="accordion-body">
+									<div class="container p-5 pt-3 pb-3">
+										<p id="ingre-list"></p>
+										<p
+											class=""
+											style="
+												font-style: italic;
+												font-size: small;
+											"
+										>
 											<span
 												class="allergen"
 												style="color: #eb9a9a"
@@ -323,7 +329,24 @@
 					</div>
 				</div>
 
-				<footer class="container">
+				<div class="container mt-5" id="help">
+					<p>
+						<em>Important:</em> we need your support! Open Food
+						Facts is a collaborative project built by tens of
+						thousands of volunteers and managed by a non-profit
+						organization with 4 employees. We need your donations to
+						fund the Open Food Facts 2022 budget and to continue to
+						develop the project. Thank you! ❤️
+					</p>
+					<a
+						href="https://world.openfoodfacts.org/donate-to-open-food-facts?utm_source=off&amp;utm_medium=web&amp;utm_campaign=donate-2022&amp;utm_term=en-text-button"
+						title="donate_button"
+					>
+						Donate
+					</a>
+				</div>
+
+				<footer class="container mt-3">
 					<div class="col">
 						<a
 							title="Who we are"

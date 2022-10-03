@@ -1,6 +1,4 @@
 $(document).ready(function () {
-	;('use strict')
-
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 	/*                            CONSTANTES                        */
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
@@ -60,6 +58,10 @@ $(document).ready(function () {
 
 		// Section nutrient table
 		fillTable(data)
+
+		// Section ingredients
+		const ingreList = $('#ingre-list')
+		ingreList.html(data.product.ingredients_text_with_allergens)
 	}
 
 	function getVeggieStatus(data) {
