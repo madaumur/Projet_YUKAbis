@@ -15,6 +15,7 @@
 	const nutriImage = document.querySelector('#nutri-image')
 	const novaImage = document.querySelector('#nova-image')
 	const ecoimage = document.querySelector('#eco-image')
+	const veggie = document.querySelector('#veggie-image')
 
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 	/*                             VARIABLES                        */
@@ -52,8 +53,7 @@
 
 	function fillProductData(data) {
 		productBrand.innerHTML = data.product.brands
-		// Gestion du nom du produit
-		getProductName(data)
+		productName.innerHTML = data.product.product_name
 		productQuantity.innerHTML = data.product.quantity
 		productImage.setAttribute('src', data.product.image_front_url)
 
@@ -74,29 +74,11 @@
 		ingreList.innerHTML = data.product.ingredients_text_with_allergens
 	}
 
-	function getProductName(data) {
-		if (data.product.product_name !== '') {
-			productName.innerHTML = data.product.product_name
-		} else if (data.product.product_name_en !== '') {
-			productName.innerHTML = data.product.product_name_en
-		} else if (data.product.generic_name !== '') {
-			productName.innerHTML = data.product.generic_name
-		} else if (data.product.generic_name_en !== '') {
-			productName.innerHTML = data.product.generic_name_en
-		} else if (data.product.product_name_fr !== '') {
-			productName.innerHTML = data.product.product_name_fr
-		} else if (data.product.generic_name_fr !== '') {
-			productName.innerHTML = data.product.generic_name_fr
-		}
-	}
-
 	function getVeggieStatus(data) {
-		const veggie = document.querySelector('#veggie-image')
-
 		if (data.product.ingredients_analysis_tags[2] === 'en:vegetarian') {
-			veggie.style.display = 'flex'
+			veggie.classList.remove('hide')
 		} else {
-			veggie.style.display = 'none'
+			veggie.classList.add('hide')
 		}
 	}
 	function getNutriscore(data) {
@@ -249,41 +231,60 @@
 
 		switch (item) {
 			case 'fat':
-				element.innerHTML =
-					getNutrientLevelSymbol(data.product.nutrient_levels.fat) +
-					' ' +
-					data.product.nutriments.fat_100g +
-					data.product.nutriments.fat_unit +
-					' of Fat'
+				if (data.product.nutrient_levels.fat) {
+					element.classList.remove('hide')
+					element.innerHTML =
+						getNutrientLevelSymbol(
+							data.product.nutrient_levels.fat
+						) +
+						' ' +
+						data.product.nutriments.fat_100g +
+						' g of Fat'
+				} else {
+					element.classList.add('hide')
+				}
 				break
-
 			case 'saturated-fat':
-				element.innerHTML =
-					getNutrientLevelSymbol(
-						data.product.nutrient_levels['saturated-fat']
-					) +
-					' ' +
-					data.product.nutriments['saturated-fat_100g'] +
-					data.product.nutriments['saturated-fat_unit'] +
-					' of Saturated Fat'
+				if (data.product.nutrient_levels['saturated-fat']) {
+					element.classList.remove('hide')
+					element.innerHTML =
+						getNutrientLevelSymbol(
+							data.product.nutrient_levels['saturated-fat']
+						) +
+						' ' +
+						data.product.nutriments['saturated-fat_100g'] +
+						' g of Saturated Fat'
+				} else {
+					element.classList.add('hide')
+				}
 				break
 			case 'sugars':
-				element.innerHTML =
-					getNutrientLevelSymbol(
-						data.product.nutrient_levels.sugars
-					) +
-					' ' +
-					data.product.nutriments.sugars_100g +
-					data.product.nutriments.sugars_unit +
-					' of Sugars'
+				if (data.product.nutrient_levels.sugars) {
+					element.classList.remove('hide')
+					element.innerHTML =
+						getNutrientLevelSymbol(
+							data.product.nutrient_levels.sugars
+						) +
+						' ' +
+						data.product.nutriments.sugars_100g +
+						' g of Sugars'
+				} else {
+					element.classList.add('hide')
+				}
 				break
 			case 'salt':
-				element.innerHTML =
-					getNutrientLevelSymbol(data.product.nutrient_levels.salt) +
-					' ' +
-					data.product.nutriments.salt_100g +
-					data.product.nutriments.salt_unit +
-					' of Salt'
+				if (data.product.nutrient_levels.salt) {
+					element.classList.remove('hide')
+					element.innerHTML =
+						getNutrientLevelSymbol(
+							data.product.nutrient_levels.salt
+						) +
+						' ' +
+						data.product.nutriments.salt_100g +
+						' g of Salt'
+				} else {
+					element.classList.add('hide')
+				}
 				break
 		}
 	}
@@ -304,101 +305,102 @@
 		const energy = document.querySelector('#row_energy')
 
 		if (data.product.nutriments['energy-kj_100g'] != null) {
+			energy.classList.remove('hide')
 			energy.childNodes[3].innerHTML =
 				data.product.nutriments['energy-kj_100g'] +
-				' ' +
-				data.product.nutriments['energy-kj_unit'] +
-				' (' +
+				' kJ / ' +
 				data.product.nutriments['energy-kcal_100g'] +
-				' ' +
-				data.product.nutriments['energy-kcal_unit'] +
-				')'
+				' kcal'
+		} else {
+			energy.classList.add('hide')
 		}
 
 		/* FAT */
 		const fat = document.querySelector('#row_fat')
 
 		if (data.product.nutriments.fat_100g != null) {
+			fat.classList.remove('hide')
 			fat.childNodes[3].innerHTML =
-				data.product.nutriments.fat_100g +
-				' ' +
-				data.product.nutriments.fat_unit
+				data.product.nutriments.fat_100g + ' g'
+		} else {
+			fat.classList.add('hide')
 		}
 
 		/* SATURATED FAT */
 		const satFat = document.querySelector('#row_saturated-fat')
 
 		if (data.product.nutriments['saturated-fat_100g'] != null) {
+			satFat.classList.remove('hide')
 			satFat.childNodes[3].innerHTML =
-				data.product.nutriments['saturated-fat_100g'] +
-				' ' +
-				data.product.nutriments['saturated-fat_unit']
+				data.product.nutriments['saturated-fat_100g'] + ' g'
 		} else {
-			satFat.style.display = 'none'
+			satFat.classList.remove('hide')
 		}
 
 		/* CARBOHYDRATES */
 		const carbo = document.querySelector('#row_carbohydrates')
 
 		if (data.product.nutriments.carbohydrates_100g != null) {
+			carbo.classList.remove('hide')
 			carbo.childNodes[3].innerHTML =
-				data.product.nutriments.carbohydrates_100g +
-				' ' +
-				data.product.nutriments.carbohydrates_unit
+				data.product.nutriments.carbohydrates_100g + ' g'
+		} else {
+			carbo.classList.add('hide')
 		}
 
 		/* SUGARS */
 		const sugars = document.querySelector('#row_sugars')
 
 		if (data.product.nutriments.sugars_100g != null) {
+			sugars.classList.remove('hide')
 			sugars.childNodes[3].innerHTML =
-				data.product.nutriments.sugars_100g +
-				' ' +
-				data.product.nutriments.sugars_unit
+				data.product.nutriments.sugars_100g + ' g'
 		} else {
-			sugars.style.display = 'none'
+			carbo.classList.add('hide')
 		}
 
 		/* FIBERS */
 		const fibers = document.querySelector('#row_fiber')
 
 		if (data.product.nutriments.fiber_100g != null) {
+			fibers.classList.remove('hide')
 			fibers.childNodes[3].innerHTML =
-				data.product.nutriments.fiber_100g +
-				' ' +
-				data.product.nutriments.fiber_unit
+				data.product.nutriments.fiber_100g + ' g'
+		} else {
+			fibers.classList.add('hide')
 		}
 
 		/* PROTEINS */
 		const proteins = document.querySelector('#row_proteins')
 
 		if (data.product.nutriments.proteins_100g != null) {
+			proteins.classList.remove('hide')
 			proteins.childNodes[3].innerHTML =
-				data.product.nutriments.proteins_100g +
-				' ' +
-				data.product.nutriments.proteins_unit
+				data.product.nutriments.proteins_100g + ' g'
+		} else {
+			proteins.classList.add('hide')
 		}
 
 		/* SALT */
 		const salt = document.querySelector('#row_salt')
 
 		if (data.product.nutriments.salt_100g != null) {
+			salt.classList.remove('hide')
 			salt.childNodes[3].innerHTML =
-				data.product.nutriments.salt_100g +
-				' ' +
-				data.product.nutriments.salt_unit
+				data.product.nutriments.salt_100g + ' g'
+		} else {
+			salt.classList.add('hide')
 		}
 
 		/* ALCOHOL */
 		const alcohol = document.querySelector('#row_alcohol')
 
 		if (data.product.nutriments.alcohol_100g != null) {
+			alcohol.classList.remove('hide')
 			alcohol.childNodes[3].innerHTML =
-				data.product.nutriments.alcohol_100g +
-				' ' +
-				data.product.nutriments.alcohol_unit
+				data.product.nutriments.alcohol_100g + ' % vol'
 		} else {
-			alcohol.style.display = 'none'
+			alcohol.classList.add('hide')
 		}
 
 		/* FRUIT / VEGETABLE */
@@ -409,10 +411,13 @@
 				'fruits-vegetables-nuts-estimate-from-ingredients_100g'
 			] != null
 		) {
+			fruit.classList.remove('hide')
 			fruit.childNodes[3].innerHTML =
 				data.product.nutriments[
 					'fruits-vegetables-nuts-estimate-from-ingredients_100g'
 				] + ' %'
+		} else {
+			fruit.classList.add('hide')
 		}
 	}
 
@@ -430,6 +435,8 @@
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 	/*                            INITIALIZE                        */
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
+
+	veggie.classList.add('hide')
 
 	const accordeon = document.getElementsByClassName('accordion')
 	let i

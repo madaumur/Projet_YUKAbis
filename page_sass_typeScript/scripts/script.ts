@@ -39,7 +39,7 @@ class Product {
 	fibers_qty_100g: number = 0
 	proteins_qty_100g: number = 0
 	alcohol_qty: number = 0
-	vagetable_qty_100g: number = 0
+	vegetable_qty_100g: number = 0
 
 	// ingredient list
 	ingredient_list: string = ''
@@ -83,7 +83,7 @@ class Product {
 			this.fibers_qty_100g = data.product.nutriments.fiber_100g
 			this.proteins_qty_100g = data.product.nutriments.proteins_100g
 			this.alcohol_qty = data.product.nutriments.alcohol_100g
-			this.vagetable_qty_100g =
+			this.vegetable_qty_100g =
 				data.product.nutriments[
 					'fruits-vegetables-nuts-estimate-from-ingredients_100g'
 				]
@@ -325,9 +325,9 @@ class Product {
 		) as HTMLImageElement
 
 		if (this.veggie === 'en:vegetarian') {
-			veggie.style.display = 'flex'
+			veggie.classList.remove('hide')
 		} else {
-			veggie.style.display = 'none'
+			veggie.classList.add('hide')
 		}
 	}
 
@@ -338,43 +338,63 @@ class Product {
 
 		switch (nutrient) {
 			case 'fat':
-				element.innerHTML =
-					setNutrientLevelSymbol(this.fat_level) +
-					' fat (' +
-					this.fat_qty_100g +
-					' g)'
+				if (this.fat_level) {
+					element.classList.remove('hide')
+					element.innerHTML =
+						setNutrientLevelSymbol(this.fat_level) +
+						' fat (' +
+						this.fat_qty_100g +
+						' g)'
+				} else {
+					element.classList.add('hide')
+				}
 				break
 			case 'saturated_fat':
-				element.innerHTML =
-					setNutrientLevelSymbol(this.satured_fat_level) +
-					' saturated fat (' +
-					this.satured_fat_qty_100g +
-					' g)'
+				if (this.satured_fat_level) {
+					element.classList.remove('hide')
+					element.innerHTML =
+						setNutrientLevelSymbol(this.satured_fat_level) +
+						' saturated fat (' +
+						this.satured_fat_qty_100g +
+						' g)'
+				} else {
+					element.classList.add('hide')
+				}
 				break
 			case 'sugars':
-				element.innerHTML =
-					setNutrientLevelSymbol(this.sugars_level) +
-					' sugars (' +
-					this.sugars_qty_100g +
-					' g)'
+				if (this.sugars_level) {
+					element.classList.remove('hide')
+					element.innerHTML =
+						setNutrientLevelSymbol(this.sugars_level) +
+						' sugars (' +
+						this.sugars_qty_100g +
+						' g)'
+				} else {
+					element.classList.add('hide')
+				}
 				break
 			case 'salt':
-				element.innerHTML =
-					setNutrientLevelSymbol(this.salt_level) +
-					' salt (' +
-					this.salt_qty_100g +
-					' g)'
+				if (this.salt_level) {
+					element.classList.remove('hide')
+					element.innerHTML =
+						setNutrientLevelSymbol(this.salt_level) +
+						' salt (' +
+						this.salt_qty_100g +
+						' g)'
+				} else {
+					element.classList.add('hide')
+				}
 				break
 		}
 
 		function setNutrientLevelSymbol(nutrient_level: string) {
 			switch (nutrient_level) {
 				case 'low':
-					return '🟢 - a low quantity of '
+					return '🟢 low quantity of '
 				case 'moderate':
-					return '🟠 - a moderate quantity of'
+					return '🟠 moderate quantity of'
 				case 'high':
-					return '🔴 - a high quantity of'
+					return '🔴 high quantity of'
 			}
 		}
 	}
@@ -383,62 +403,107 @@ class Product {
 		/* ENERGY */
 		const energy = document.querySelector('#row_energy') as HTMLElement
 
-		energy.childNodes[3].textContent =
-			this.energy_kcal_100g + ' kcal / ' + this.energy_kj_100g
-		;(' kJ')
+		if (this.energy_kcal_100g != null || this.energy_kj_100g != null) {
+			energy.classList.remove('hide')
+			energy.childNodes[3].textContent =
+				this.energy_kcal_100g + ' kcal / ' + this.energy_kj_100g + ' kJ'
+		} else {
+			energy.classList.add('hide')
+		}
 
 		/* FAT */
 		const fat = document.querySelector('#row_fat') as HTMLElement
 
-		fat.childNodes[3].textContent = this.fat_qty_100g + ' g'
+		if (this.fat_qty_100g != null) {
+			fat.classList.remove('hide')
+			fat.childNodes[3].textContent = this.fat_qty_100g + ' g'
+		} else {
+			fat.classList.add('hide')
+		}
 
 		/* SATURATED FAT */
 		const satFat = document.querySelector(
 			'#row_saturated-fat'
 		) as HTMLElement
 
-		satFat.childNodes[3].textContent = this.satured_fat_qty_100g + ' g'
+		if (this.satured_fat_qty_100g != null) {
+			satFat.classList.remove('hide')
+			satFat.childNodes[3].textContent = this.satured_fat_qty_100g + ' g'
+		} else {
+			satFat.classList.add('hide')
+		}
 
 		/* CARBOHYDRATES */
 		const carbo = document.querySelector(
 			'#row_carbohydrates'
 		) as HTMLElement
 
-		carbo.childNodes[3].textContent = this.carbohydrates_qty_100g + ' g'
+		if (this.carbohydrates_qty_100g != null) {
+			carbo.classList.remove('hide')
+			carbo.childNodes[3].textContent = this.carbohydrates_qty_100g + ' g'
+		} else {
+			carbo.classList.add('hide')
+		}
 
 		/* SUGARS */
 		const sugars = document.querySelector('#row_sugars') as HTMLElement
 
-		sugars.childNodes[3].textContent = this.sugars_qty_100g + ' g'
+		if (this.sugars_qty_100g != null) {
+			sugars.classList.remove('hide')
+			sugars.childNodes[3].textContent = this.sugars_qty_100g + ' g'
+		} else {
+			sugars.classList.add('hide')
+		}
 
 		/* FIBERS */
 		const fibers = document.querySelector('#row_fiber') as HTMLElement
 
-		fibers.childNodes[3].textContent = this.fibers_qty_100g + ' g'
+		if (this.fibers_qty_100g != null) {
+			fibers.classList.remove('hide')
+			fibers.childNodes[3].textContent = this.fibers_qty_100g + ' g'
+		} else {
+			fibers.classList.add('hide')
+		}
 
 		/* PROTEINS */
 		const proteins = document.querySelector('#row_proteins') as HTMLElement
 
-		proteins.childNodes[3].textContent = this.fibers_qty_100g + ' g'
+		if (this.proteins_qty_100g != null) {
+			proteins.classList.remove('hide')
+			proteins.childNodes[3].textContent = this.proteins_qty_100g + ' g'
+		} else {
+			proteins.classList.add('hide')
+		}
 
 		/* SALT */
 		const salt = document.querySelector('#row_salt') as HTMLElement
 
-		salt.childNodes[3].textContent = this.salt_qty_100g + ' g'
+		if (this.salt_qty_100g != null) {
+			salt.classList.remove('hide')
+			salt.childNodes[3].textContent = this.salt_qty_100g + ' g'
+		} else {
+			salt.classList.add('hide')
+		}
 
 		/* ALCOHOL */
 		const alcohol = document.querySelector('#row_alcohol') as HTMLElement
 
 		if (this.alcohol_qty != null) {
-			alcohol.childNodes[3].textContent = this.alcohol_qty + ' %'
+			alcohol.classList.remove('hide')
+			alcohol.childNodes[3].textContent = this.alcohol_qty + ' % vol'
 		} else {
-			alcohol.style.display = 'none'
+			alcohol.classList.add('hide')
 		}
 
 		/* FRUIT / VEGETABLE */
 		const fruit = document.querySelector('#row_fruit') as HTMLElement
 
-		fruit.childNodes[3].textContent = this.vagetable_qty_100g + ' g'
+		if (this.vegetable_qty_100g != null) {
+			fruit.classList.remove('hide')
+			fruit.childNodes[3].textContent = this.vegetable_qty_100g + ' %'
+		} else {
+			fruit.classList.add('hide')
+		}
 	}
 }
 
@@ -457,13 +522,29 @@ function initInputFunction(): void {
  *	Initialisation de l'accodeon avec ajout des listeners
  */
 function initAccordionFunction(): void {
-	const accordion = document.getElementsByClassName(
+	const accordion_list = document.getElementsByClassName(
 		'accordion'
 	) as HTMLCollectionOf<HTMLElement>
 
-	Array.from(accordion).forEach((button) => {
+	Array.from(accordion_list).forEach((button) => {
 		button.addEventListener('click', listenerAccordionFunction)
 	})
+}
+
+function showPanel(boolean: boolean): void {
+	const panel_list = document.getElementsByClassName(
+		'panel-body'
+	) as HTMLCollectionOf<HTMLElement>
+
+	if (boolean === false) {
+		Array.from(panel_list).forEach((element) => {
+			element.classList.add('hide')
+		})
+	} else {
+		Array.from(panel_list).forEach((element) => {
+			element.classList.remove('hide')
+		})
+	}
 }
 
 /**
@@ -501,8 +582,11 @@ function listenerInputFunction(this: HTMLInputElement, ev: Event): void {
 			// On traite les données
 			.then((data) => {
 				const product: Product = new Product(data)
+				showPanel(true)
 				product.fillProductData()
 			})
+	} else {
+		showPanel(false)
 	}
 }
 
@@ -530,3 +614,4 @@ function listenerAccordionFunction(this: HTMLElement, ev: Event): void {
 
 initInputFunction()
 initAccordionFunction()
+showPanel(false)

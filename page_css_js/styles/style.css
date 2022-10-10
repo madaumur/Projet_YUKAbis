@@ -29,6 +29,11 @@ input:focus {
 	color: #eb9a9a;
 }
 
+.hide {
+	display: none;
+	visibility: hidden;
+}
+
 /*-Main-----------------------------------------------------------*/
 main {
 	align-self: center;
@@ -75,6 +80,7 @@ main {
 
 #barcode-field {
 	width: 70%;
+	max-width: 250px;
 	border-bottom: #d6d6d6 1px solid;
 	text-align: center;
 }
@@ -185,9 +191,6 @@ main {
 	max-height: 70px;
 }
 
-#veggie-image {
-	display: none;
-}
 /*-Main_Container3 : valeur au 100g-------------------------------*/
 #panel-two-body {
 	flex-direction: column;

@@ -38,7 +38,7 @@ var Product = /** @class */ (function () {
         this.fibers_qty_100g = 0;
         this.proteins_qty_100g = 0;
         this.alcohol_qty = 0;
-        this.vagetable_qty_100g = 0;
+        this.vegetable_qty_100g = 0;
         // ingredient list
         this.ingredient_list = '';
         if (data) {
@@ -71,7 +71,7 @@ var Product = /** @class */ (function () {
             this.fibers_qty_100g = data.product.nutriments.fiber_100g;
             this.proteins_qty_100g = data.product.nutriments.proteins_100g;
             this.alcohol_qty = data.product.nutriments.alcohol_100g;
-            this.vagetable_qty_100g =
+            this.vegetable_qty_100g =
                 data.product.nutriments['fruits-vegetables-nuts-estimate-from-ingredients_100g'];
             // ingredient list
             this.ingredient_list = data.product.ingredients_text_with_allergens;
@@ -210,93 +210,171 @@ var Product = /** @class */ (function () {
     Product.prototype.setVeggieStatus = function () {
         var veggie = document.querySelector('#veggie-image');
         if (this.veggie === 'en:vegetarian') {
-            veggie.style.display = 'flex';
+            veggie.classList.remove('hide');
         }
         else {
-            veggie.style.display = 'none';
+            veggie.classList.add('hide');
         }
     };
     Product.prototype.setNutrientLevel = function (nutrient) {
         var element = document.querySelector("#nutrient-" + nutrient);
         switch (nutrient) {
             case 'fat':
-                element.innerHTML =
-                    setNutrientLevelSymbol(this.fat_level) +
-                        ' fat (' +
-                        this.fat_qty_100g +
-                        ' g)';
+                if (this.fat_level) {
+                    element.classList.remove('hide');
+                    element.innerHTML =
+                        setNutrientLevelSymbol(this.fat_level) +
+                            ' fat (' +
+                            this.fat_qty_100g +
+                            ' g)';
+                }
+                else {
+                    element.classList.add('hide');
+                }
                 break;
             case 'saturated_fat':
-                element.innerHTML =
-                    setNutrientLevelSymbol(this.satured_fat_level) +
-                        ' saturated fat (' +
-                        this.satured_fat_qty_100g +
-                        ' g)';
+                if (this.satured_fat_level) {
+                    element.classList.remove('hide');
+                    element.innerHTML =
+                        setNutrientLevelSymbol(this.satured_fat_level) +
+                            ' saturated fat (' +
+                            this.satured_fat_qty_100g +
+                            ' g)';
+                }
+                else {
+                    element.classList.add('hide');
+                }
                 break;
             case 'sugars':
-                element.innerHTML =
-                    setNutrientLevelSymbol(this.sugars_level) +
-                        ' sugars (' +
-                        this.sugars_qty_100g +
-                        ' g)';
+                if (this.sugars_level) {
+                    element.classList.remove('hide');
+                    element.innerHTML =
+                        setNutrientLevelSymbol(this.sugars_level) +
+                            ' sugars (' +
+                            this.sugars_qty_100g +
+                            ' g)';
+                }
+                else {
+                    element.classList.add('hide');
+                }
                 break;
             case 'salt':
-                element.innerHTML =
-                    setNutrientLevelSymbol(this.salt_level) +
-                        ' salt (' +
-                        this.salt_qty_100g +
-                        ' g)';
+                if (this.salt_level) {
+                    element.classList.remove('hide');
+                    element.innerHTML =
+                        setNutrientLevelSymbol(this.salt_level) +
+                            ' salt (' +
+                            this.salt_qty_100g +
+                            ' g)';
+                }
+                else {
+                    element.classList.add('hide');
+                }
                 break;
         }
         function setNutrientLevelSymbol(nutrient_level) {
             switch (nutrient_level) {
                 case 'low':
-                    return '🟢 - a low quantity of ';
+                    return '🟢 low quantity of ';
                 case 'moderate':
-                    return '🟠 - a moderate quantity of';
+                    return '🟠 moderate quantity of';
                 case 'high':
-                    return '🔴 - a high quantity of';
+                    return '🔴 high quantity of';
             }
         }
     };
     Product.prototype.fillTable = function () {
         /* ENERGY */
         var energy = document.querySelector('#row_energy');
-        energy.childNodes[3].textContent =
-            this.energy_kcal_100g + ' kcal / ' + this.energy_kj_100g;
-        (' kJ');
+        if (this.energy_kcal_100g != null || this.energy_kj_100g != null) {
+            energy.classList.remove('hide');
+            energy.childNodes[3].textContent =
+                this.energy_kcal_100g + ' kcal / ' + this.energy_kj_100g + ' kJ';
+        }
+        else {
+            energy.classList.add('hide');
+        }
         /* FAT */
         var fat = document.querySelector('#row_fat');
-        fat.childNodes[3].textContent = this.fat_qty_100g + ' g';
+        if (this.fat_qty_100g != null) {
+            fat.classList.remove('hide');
+            fat.childNodes[3].textContent = this.fat_qty_100g + ' g';
+        }
+        else {
+            fat.classList.add('hide');
+        }
         /* SATURATED FAT */
         var satFat = document.querySelector('#row_saturated-fat');
-        satFat.childNodes[3].textContent = this.satured_fat_qty_100g + ' g';
+        if (this.satured_fat_qty_100g != null) {
+            satFat.classList.remove('hide');
+            satFat.childNodes[3].textContent = this.satured_fat_qty_100g + ' g';
+        }
+        else {
+            satFat.classList.add('hide');
+        }
         /* CARBOHYDRATES */
         var carbo = document.querySelector('#row_carbohydrates');
-        carbo.childNodes[3].textContent = this.carbohydrates_qty_100g + ' g';
+        if (this.carbohydrates_qty_100g != null) {
+            carbo.classList.remove('hide');
+            carbo.childNodes[3].textContent = this.carbohydrates_qty_100g + ' g';
+        }
+        else {
+            carbo.classList.add('hide');
+        }
         /* SUGARS */
         var sugars = document.querySelector('#row_sugars');
-        sugars.childNodes[3].textContent = this.sugars_qty_100g + ' g';
+        if (this.sugars_qty_100g != null) {
+            sugars.classList.remove('hide');
+            sugars.childNodes[3].textContent = this.sugars_qty_100g + ' g';
+        }
+        else {
+            sugars.classList.add('hide');
+        }
         /* FIBERS */
         var fibers = document.querySelector('#row_fiber');
-        fibers.childNodes[3].textContent = this.fibers_qty_100g + ' g';
+        if (this.fibers_qty_100g != null) {
+            fibers.classList.remove('hide');
+            fibers.childNodes[3].textContent = this.fibers_qty_100g + ' g';
+        }
+        else {
+            fibers.classList.add('hide');
+        }
         /* PROTEINS */
         var proteins = document.querySelector('#row_proteins');
-        proteins.childNodes[3].textContent = this.fibers_qty_100g + ' g';
+        if (this.proteins_qty_100g != null) {
+            proteins.classList.remove('hide');
+            proteins.childNodes[3].textContent = this.proteins_qty_100g + ' g';
+        }
+        else {
+            proteins.classList.add('hide');
+        }
         /* SALT */
         var salt = document.querySelector('#row_salt');
-        salt.childNodes[3].textContent = this.salt_qty_100g + ' g';
+        if (this.salt_qty_100g != null) {
+            salt.classList.remove('hide');
+            salt.childNodes[3].textContent = this.salt_qty_100g + ' g';
+        }
+        else {
+            salt.classList.add('hide');
+        }
         /* ALCOHOL */
         var alcohol = document.querySelector('#row_alcohol');
         if (this.alcohol_qty != null) {
-            alcohol.childNodes[3].textContent = this.alcohol_qty + ' %';
+            alcohol.classList.remove('hide');
+            alcohol.childNodes[3].textContent = this.alcohol_qty + ' % vol';
         }
         else {
-            alcohol.style.display = 'none';
+            alcohol.classList.add('hide');
         }
         /* FRUIT / VEGETABLE */
         var fruit = document.querySelector('#row_fruit');
-        fruit.childNodes[3].textContent = this.vagetable_qty_100g + ' g';
+        if (this.vegetable_qty_100g != null) {
+            fruit.classList.remove('hide');
+            fruit.childNodes[3].textContent = this.vegetable_qty_100g + ' %';
+        }
+        else {
+            fruit.classList.add('hide');
+        }
     };
     return Product;
 }());
@@ -313,10 +391,23 @@ function initInputFunction() {
  *	Initialisation de l'accodeon avec ajout des listeners
  */
 function initAccordionFunction() {
-    var accordion = document.getElementsByClassName('accordion');
-    Array.from(accordion).forEach(function (button) {
+    var accordion_list = document.getElementsByClassName('accordion');
+    Array.from(accordion_list).forEach(function (button) {
         button.addEventListener('click', listenerAccordionFunction);
     });
+}
+function showPanel(boolean) {
+    var panel_list = document.getElementsByClassName('panel-body');
+    if (boolean === false) {
+        Array.from(panel_list).forEach(function (element) {
+            element.classList.add('hide');
+        });
+    }
+    else {
+        Array.from(panel_list).forEach(function (element) {
+            element.classList.remove('hide');
+        });
+    }
 }
 /**
  *	Construction de la requète à partir d'un code barre
@@ -349,8 +440,12 @@ function listenerInputFunction(ev) {
             // On traite les données
             .then(function (data) {
             var product = new Product(data);
+            showPanel(true);
             product.fillProductData();
         });
+    }
+    else {
+        showPanel(false);
     }
 }
 /**
@@ -374,3 +469,4 @@ function listenerAccordionFunction(ev) {
 /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 initInputFunction();
 initAccordionFunction();
+showPanel(false);
