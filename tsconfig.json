@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"outDir": "script.js",
+		"strict": true,
+		"watch": true,
+		"forceConsistentCasingInFileNames": true,
+		"alwaysStrict": true,
+		"importHelpers": false
+	},
+	"files": ["page_sass_typescript/scripts/script.ts"]
+}

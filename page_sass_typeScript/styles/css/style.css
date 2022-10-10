@@ -77,15 +77,15 @@ main #container-product {
 main #container-product #product-image {
   width: 25%;
   max-height: 200px;
-  padding: 1em 1em 1em 1em;
+  padding: 1em;
 }
 main #container-product #product-image img {
   max-width: 100%;
-  max-height: 100%;
+  max-height: inherit;
 }
 main #container-product #product-label {
   width: 65%;
-  padding: 1em 1em 1em 1em;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -130,7 +130,7 @@ main .panel {
   font-size: medium;
   border-bottom: #d6d6d6 1px solid;
 }
-main .panel .panel-body {
+main .panel-body {
   overflow: hidden;
   display: none;
   flex-direction: column;
@@ -214,4 +214,4 @@ footer a {
 }
 footer a:hover {
   color: #75d84e;
-}/*# sourceMappingURL=style.css.map */
+}

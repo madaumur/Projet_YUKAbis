@@ -11,7 +11,7 @@
 			content="Projet AFPA de la réalisation d'un site donnant les informations de produits alimentires en se basant sur l'API d'OpenFoodFact"
 		/>
 
-		<link rel="stylesheet" href="./styles/style.css" />
+		<link rel="stylesheet" href="./styles/css/style.css" />
 	</head>
 
 	<body>
@@ -32,17 +32,12 @@
 
 			<div id="container-product" class="container">
 				<div id="product-image">
-					<img
-						id="front-image"
-						alt="front product image"
-						title="front product image"
-						src="https://via.placeholder.com/350.jpg"
-					/>
+					<img id="front-image" alt="Product image unreachable" />
 				</div>
 				<div id="product-label">
-					<label id="product-brand">product brand</label>
-					<label id="product-name">product name</label>
-					<label id="product-quantity">product quantity</label>
+					<label id="product-brand"></label>
+					<label id="product-name"></label>
+					<label id="product-quantity"></label>
 				</div>
 			</div>
 
@@ -52,24 +47,9 @@
 						Nutrition facts
 					</button>
 					<div id="panel-one-body" class="panel-body">
-						<img
-							id="nutri-image"
-							alt="Nutriscore unreachable"
-							title="Product's nutriscore"
-							src="/ressources/nutriscore/nutriscore-default.svg"
-						/>
-						<img
-							id="nova-image"
-							alt="NOVA score unreachable"
-							title="Product's NOVA score"
-							src="/ressources/novascore/novascore-default.svg"
-						/>
-						<img
-							id="eco-image"
-							alt="Ecoscore unreachable"
-							title="Product's ecoscore"
-							src="/ressources/ecoscore/ecoscore-default.svg"
-						/>
+						<img id="nutri-image" alt="Nutriscore unreachable" />
+						<img id="nova-image" alt="Novascore unreachable" />
+						<img id="eco-image" alt="Ecoscore unreachable" />
 						<img
 							id="veggie-image"
 							alt="Vegetarian status unreachable"
@@ -84,7 +64,7 @@
 					</button>
 					<div id="panel-two-body" class="panel-body">
 						<label id="nutrient-fat"></label>
-						<label id="nutrient-saturated-fat"></label>
+						<label id="nutrient-saturated_fat"></label>
 						<label id="nutrient-salt"></label>
 						<label id="nutrient-sugars"></label>
 					</div>
@@ -201,6 +181,6 @@
 			</div>
 		</footer>
 
-		<script src="./scripts/script.js"></script>
+		<script src="./scripts/js/script.js"></script>
 	</body>
 </html>

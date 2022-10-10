@@ -91,17 +91,17 @@ main {
 		#product-image {
 			width: 25%;
 			max-height: 200px;
-			padding: 1em 1em 1em 1em;
+			padding: 1em;
 
 			img {
 				max-width: 100%;
-				max-height: 100%;
+				max-height: inherit;
 			}
 		}
 
 		#product-label {
 			width: 65%;
-			padding: 1em 1em 1em 1em;
+			padding: 1em;
 
 			display: flex;
 			flex-direction: column;
@@ -159,7 +159,7 @@ main {
 
 		border-bottom: $primary-color 1px solid;
 
-		.panel-body {
+		&-body {
 			overflow: hidden;
 			display: none;
 			flex-direction: column;
