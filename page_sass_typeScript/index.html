@@ -4,88 +4,76 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
-		<title>Projet YUKAbis V1</title>
+		<title>Projet YUKAbis V3</title>
 		<meta name="author" content="madaumur" />
 		<meta
 			name="description"
 			content="Projet AFPA de la réalisation d'un site donnant les informations de produits alimentires en se basant sur l'API d'OpenFoodFact"
 		/>
 
-		<link rel="stylesheet" href="./styles/style.css" />
+		<link rel="stylesheet" href="./styles/css/style.css" />
 	</head>
 
 	<body>
 		<header></header>
 
 		<main>
-			<div id="container-h1">
+			<div id="container-title" class="container">
 				<h1>YUKA<em>bis</em></h1>
 				<label>based on Open Food Facts</label>
-				<div id="container-h1-A">
+				<div id="title-input">
 					<input
+						id="barcode-field"
 						type="search"
 						placeholder="Enter a barcoode"
-						id="barcode-field"
 					/>
 				</div>
 			</div>
 
-			<div id="container-b1">
-				<div id="container-b1-A">
-					<img
-						id="product-image"
-						alt=""
-						title="illustration du produit recherché"
-						src="https://via.placeholder.com/350.jpg"
-					/>
+			<div id="container-product" class="container">
+				<div id="product-image">
+					<img id="front-image" alt="Product image unreachable" />
 				</div>
-				<div id="container-b1-B">
-					<label id="product-brand">product brand</label>
-					<label id="product-name">product name</label>
-					<label id="product-quantity">product quantity</label>
+				<div id="product-label">
+					<label id="product-brand"></label>
+					<label id="product-name"></label>
+					<label id="product-quantity"></label>
 				</div>
 			</div>
 
-			<div id="container-b1-bis">
-				<button class="accordeon">Nutrition facts</button>
-				<div id="container-b2">
-					<img
-						id="nutri-image"
-						alt="NutriScore introuvable"
-						title="NutriScore du produit recherché"
-						src="/ressources/nutriscore/nutriscore-default.svg"
-					/>
-					<img
-						id="nova-image"
-						alt="Score NOVA introuvable"
-						title="Score NOVA du produit recherché"
-						src="/ressources/novascore/novascore-default.svg"
-					/>
-					<img
-						id="eco-image"
-						alt="EcoScore introuvable"
-						title="EcoScore du produit recherché"
-						src="/ressources/ecoscore/ecoscore-default.svg"
-					/>
-					<img
-						id="veggie-image"
-						alt="Statut veggie introuvable"
-						title="Le produit est végétarien"
-						src="/ressources/icons/vegetarian.png"
-					/>
+			<div id="container-accordion" class="container">
+				<div id="panel-one" class="panel">
+					<button id="panel-one-head" class="accordion">
+						Nutrition facts
+					</button>
+					<div id="panel-one-body" class="panel-body">
+						<img id="nutri-image" alt="Nutriscore unreachable" />
+						<img id="nova-image" alt="Novascore unreachable" />
+						<img id="eco-image" alt="Ecoscore unreachable" />
+						<img
+							id="veggie-image"
+							alt="Vegetarian status unreachable"
+							title="Product is vegetarian"
+							src="/ressources/icons/vegetarian.png"
+						/>
+					</div>
 				</div>
-				<button class="accordeon">Nutrient levels for 100 g</button>
-				<div id="container-b3">
-					<div id="b3-A">
+				<div id="panel-two" class="panel">
+					<button id="panel-two-head" class="accordion">
+						Nutrient levels for 100 g
+					</button>
+					<div id="panel-two-body" class="panel-body">
 						<label id="nutrient-fat"></label>
-						<label id="nutrient-saturated-fat"></label>
+						<label id="nutrient-saturated_fat"></label>
 						<label id="nutrient-salt"></label>
 						<label id="nutrient-sugars"></label>
 					</div>
 				</div>
-				<button class="accordeon">Nutritional table</button>
-				<div id="container-b4">
-					<div id="b4-A">
+				<div id="panel-three" class="panel">
+					<button id="panel-three-head" class="accordion">
+						Nutritional table
+					</button>
+					<div id="panel-three-body" class="panel-body">
 						<table>
 							<caption>
 								Nutritional table
@@ -148,18 +136,21 @@
 						</table>
 					</div>
 				</div>
-				<button class="accordeon">Ingredients</button>
-				<div id="container-b5">
-					<div id="b5-A">
+				<div id="panel-four" class="panel">
+					<button id="panel-four-head" class="accordion">
+						Ingredients
+					</button>
+					<div id="panel-four-body" class="panel-body">
 						<div id="ingre-list"></div>
 						<div id="ingre-list-notice">
-							<span class="allergen">Red ingredients</span> are
-							potential allergen.
+							<span class="allergen">Red ingredients</span>
+							are potential allergen.
 						</div>
 					</div>
 				</div>
 			</div>
-			<div id="container-b6">
+
+			<div id="container-donation" class="container">
 				<p>
 					<em>Important:</em> we need your support! Open Food Facts is
 					a collaborative project built by tens of thousands of
@@ -170,7 +161,7 @@
 				</p>
 				<a
 					href="https://world.openfoodfacts.org/donate-to-open-food-facts?utm_source=off&amp;utm_medium=web&amp;utm_campaign=donate-2022&amp;utm_term=en-text-button"
-					title="donate_button"
+					title="donation-button"
 				>
 					Donate
 				</a>
@@ -178,18 +169,18 @@
 		</main>
 
 		<footer>
-			<div id="container-f1">
+			<div id="container-footer">
 				<a
 					title="Who we are"
 					href="https://world.openfoodfacts.org/who-we-are"
 					>Open food facts</a
 				>
 				<a title="Contact" href="#">Contact</a>
-				<a title="Home" href="../index.html">Home </a>
+				<a href="../index.html">Home </a>
 				<a title="Top" href="#">↑</a>
 			</div>
 		</footer>
 
-		<script src="./scripts/script.js"></script>
+		<script src="./scripts/js/script.js"></script>
 	</body>
 </html>
