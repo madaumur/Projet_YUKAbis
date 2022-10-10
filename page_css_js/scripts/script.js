@@ -10,7 +10,7 @@
 	const productBrand = document.querySelector('#product-brand')
 	const productName = document.querySelector('#product-name')
 	const productQuantity = document.querySelector('#product-quantity')
-	const productImage = document.querySelector('#product-image')
+	const productImage = document.querySelector('#front-image')
 
 	const nutriImage = document.querySelector('#nutri-image')
 	const novaImage = document.querySelector('#nova-image')
@@ -431,7 +431,7 @@
 	/*                            INITIALIZE                        */
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-	const accordeon = document.getElementsByClassName('accordeon')
+	const accordeon = document.getElementsByClassName('accordion')
 	let i
 
 	for (i = 0; i < accordeon.length; i++) {
