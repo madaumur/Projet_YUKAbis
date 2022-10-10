@@ -5,6 +5,7 @@
 	/*                            CONSTANTES                        */
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
+	const accordionList = document.getElementsByClassName('accordion')
 	const barcodeField = document.querySelector('#barcode-field')
 
 	const productBrand = document.querySelector('#product-brand')
@@ -58,10 +59,10 @@
 		productImage.setAttribute('src', data.product.image_front_url)
 
 		// Panel - Nutrition facts
-		getVeggieStatus(data)
-		getNutriscore(data)
-		getNovascore(data)
-		getEcoscore(data)
+		setVeggieStatus(data)
+		setNutriscore(data)
+		setNovascore(data)
+		setEcoscore(data)
 
 		// Panel - Nutrition level for 100g
 		const nutriLevels = ['fat', 'saturated-fat', 'sugars', 'salt']
@@ -74,14 +75,15 @@
 		ingreList.innerHTML = data.product.ingredients_text_with_allergens
 	}
 
-	function getVeggieStatus(data) {
+	function setVeggieStatus(data) {
 		if (data.product.ingredients_analysis_tags[2] === 'en:vegetarian') {
 			veggie.classList.remove('hide')
 		} else {
 			veggie.classList.add('hide')
 		}
 	}
-	function getNutriscore(data) {
+
+	function setNutriscore(data) {
 		switch (data.product.nutriscore_grade) {
 			case 'a':
 				nutriImage.setAttribute(
@@ -132,7 +134,7 @@
 		}
 	}
 
-	function getNovascore(data) {
+	function setNovascore(data) {
 		switch (data.product.nova_group) {
 			case 1:
 				novaImage.setAttribute(
@@ -178,7 +180,7 @@
 		}
 	}
 
-	function getEcoscore(data) {
+	function setEcoscore(data) {
 		switch (data.product.ecoscore_grade) {
 			case 'a':
 				ecoimage.setAttribute(
@@ -436,13 +438,13 @@
 	/*                            INITIALIZE                        */
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-	veggie.classList.add('hide')
+	veggie.classList.toggle('hide')
 
-	const accordeon = document.getElementsByClassName('accordion')
-	let i
-
-	for (i = 0; i < accordeon.length; i++) {
-		accordeon[i].addEventListener('click', function () {
+	/**
+	 *	Initialisation de l'accodeon avec ajout des listeners
+	 */
+	Array.from(accordionList).forEach((button) => {
+		button.addEventListener('click', function () {
 			this.classList.toggle('active')
 
 			const panel = this.nextElementSibling
@@ -452,5 +454,5 @@
 				panel.style.display = 'flex'
 			}
 		})
-	}
+	})
 })()
