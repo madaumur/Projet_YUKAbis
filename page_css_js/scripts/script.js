@@ -12,7 +12,7 @@
  * @returns				La requete complete pour le fetch
  */
 function queryConstructor(barcode) {
-	return `https://world.openfoodfacts.org/api/product/${barcode}.json`
+	return `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
 }
 
 /**
@@ -191,11 +191,9 @@ function setEcoscore(param) {
 function setVeggieStatus(param) {
 	const veggie = document.querySelector('#veggie-image')
 
-	if (param === 'en:vegetarian') {
-		veggie.classList.remove('hide')
-	} else {
-		veggie.classList.add('hide')
-	}
+	param === 'en:vegetarian'
+		? veggie.classList.remove('hide')
+		: veggie.classList.add('hide')
 }
 
 /**
