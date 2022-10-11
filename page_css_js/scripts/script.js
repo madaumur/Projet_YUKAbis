@@ -12,7 +12,7 @@
  * @returns				La requete complete pour le fetch
  */
 function queryConstructor(barcode) {
-	return `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
+	return `https://world.openfoodfacts.org/api/product/${barcode}.json`
 }
 
 /**
@@ -302,7 +302,7 @@ function initInputFunction() {
  *  Action du listener sur l'input field
  */
 function listenerInputFunction() {
-	if (/^([0-9]{8,13})$/.test(this.value.trim())) {
+	if (/^(\d{8,13})$/.test(this.value.trim())) {
 		fetchProduct(this.value.trim())
 	}
 }
