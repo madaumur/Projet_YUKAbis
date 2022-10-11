@@ -200,6 +200,7 @@ class Product {
 				)
 				nutriImage.setAttribute('alt', 'Nutriscore unreachable')
 				nutriImage.setAttribute('title', "Product's nutriscore")
+				break
 		}
 	}
 
@@ -257,6 +258,7 @@ class Product {
 				)
 				novaImage.setAttribute('alt', 'Novascore unreachable')
 				novaImage.setAttribute('title', "Product's novascore")
+				break
 		}
 	}
 
@@ -316,6 +318,7 @@ class Product {
 				)
 				ecoImage.setAttribute('alt', 'Ecoscore unreachable')
 				ecoImage.setAttribute('title', "Product's ecoscore")
+				break
 		}
 	}
 

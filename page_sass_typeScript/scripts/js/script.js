@@ -142,6 +142,7 @@ var Product = /** @class */ (function () {
                 nutriImage.setAttribute('src', '/ressources/nutriscore/nutriscore-default.svg');
                 nutriImage.setAttribute('alt', 'Nutriscore unreachable');
                 nutriImage.setAttribute('title', "Product's nutriscore");
+                break;
         }
     };
     Product.prototype.settNovascore = function () {
@@ -171,6 +172,7 @@ var Product = /** @class */ (function () {
                 novaImage.setAttribute('src', '/ressources/novascore/novascore-default.svg');
                 novaImage.setAttribute('alt', 'Novascore unreachable');
                 novaImage.setAttribute('title', "Product's novascore");
+                break;
         }
     };
     Product.prototype.setEcoscore = function () {
@@ -205,6 +207,7 @@ var Product = /** @class */ (function () {
                 ecoImage.setAttribute('src', '/ressources/ecoscore/ecoscore-default.svg');
                 ecoImage.setAttribute('alt', 'Ecoscore unreachable');
                 ecoImage.setAttribute('title', "Product's ecoscore");
+                break;
         }
     };
     Product.prototype.setVeggieStatus = function () {
