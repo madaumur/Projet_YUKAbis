@@ -1,398 +1,288 @@
 $(document).ready(function () {
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
-	/*                            CONSTANTES                        */
-	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
-
-	const barcodeField = $('#product-searchfield')
-
-	const productBrand = $('#product-brand')
-	const productName = $('#product-name')
-	const productQuantity = $('#product-quantity')
-	const productImage = $('#product_icon')
-
-	const nutriImage = $('#nutri-image')
-	const novaImage = $('#nova-image')
-	const ecoimage = $('#eco-image')
-
-	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
-	/*                             VARIABLES                        */
+	/*                       CONSTANTES / VARIABLES                 */
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 	/*                             FONCTIONS                        */
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-	// Construction de la requète à partir d'un code barre
+	/**
+	 * 	Construction de la requète à partir d'un code barre
+	 * @param {*} barcode	Le code barre à rechercher
+	 * @returns				La requete complete pour le getJSON
+	 */
 	function queryConstructor(barcode) {
 		return `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
 	}
 
-	// Aqcuisition des données à partir de l'api
+	/**
+	 * 	Aqcuisition des données à partir de l'api
+	 * @param {*} barcode	Le code barre du produit à rechercher
+	 */
 	function getProductData(barcode) {
 		$.getJSON(queryConstructor(barcode), (data) => {
 			fillProductData(data)
 		})
 	}
 
+	/**
+	 * 	Affichage des données du produit sur notre site
+	 * @param {*} data 		Les données du produit provenant du getJSON
+	 */
 	function fillProductData(data) {
-		// Section general infos
-		// @TODO : penser aux vérif des champs du produit comme pour le nom
-		productBrand.html(data.product.brands)
+		// Panel - General info ( marque, nom, quantité, image )
+		$('#product-brand').html(data.product.brands)
+		$('#product-name').html(data.product.product_name)
+		$('#product-quantity').html(data.product.quantity)
+		$('#product_icon').attr('src', data.product.image_url)
 
-		data.productName === ''
-			? productName.html(data.product.generic_name)
-			: productName.html(data.product.product_name)
+		// Panel - Nutrition facts
+		setNutriscore(data.product.nutriscore_grade)
+		setNovascore(data.product.nova_group)
+		setEcoscore(data.product.ecoscore_grade)
+		setVeggieStatus(data.product.ingredients_analysis_tags[2])
 
-		productQuantity.html(data.product.quantity)
-		productImage.attr('src', data.product.image_url)
+		// Panel - Nutrition level for 100g
+		setNutrientLevel(data)
 
-		// Section nutrition facts
-		getVeggieStatus(data)
-		getNutriscore(data)
-		getNovascore(data)
-		getEcoscore(data)
-
-		// Section nutrient levels
-		const nutriLevels = ['fat', 'saturated-fat', 'sugars', 'salt']
-		nutriLevels.forEach((element) => getNutrientLevel(data, element))
-
-		// Section nutrient table
+		// Panel - Nutritional table
 		fillTable(data)
 
-		// Section ingredients
+		// Panel - Ingredients
 		const ingreList = $('#ingre-list')
 		ingreList.html(data.product.ingredients_text_with_allergens)
 	}
 
-	function getVeggieStatus(data) {
+	/**
+	 *	Affichage de l'image du nutriscore correspondant au produit
+	 * @param {*} param		La valeur du nutriscore du produit
+	 */
+	function setNutriscore(param) {
+		const nutriImage = $('#nutri-image')
+
+		if (/^[a-e]$/.test(param)) {
+			nutriImage.attr(
+				'src',
+				`/ressources/nutriscore/nutriscore-${param}.svg`
+			)
+			nutriImage.attr('alt', 'Nutriscore ' + param.toUpperCase())
+			switch (param) {
+				case 'a':
+					nutriImage.attr('title', 'Excellent nutritional quality')
+					break
+				case 'b':
+					nutriImage.attr('title', 'Good nutritional quality')
+					break
+				case 'c':
+					nutriImage.attr('title', 'Moderate nutritional quality')
+					break
+				case 'd':
+					nutriImage.attr('title', 'Poor nutritional quality')
+					break
+				case 'e':
+					nutriImage.attr('title', 'Very poor nutritional quality')
+					break
+			}
+		} else {
+			nutriImage.attr(
+				'src',
+				'/ressources/nutriscore/nutriscore-default.svg'
+			)
+			nutriImage.attr('alt', 'Nutriscore unreachable')
+			nutriImage.attr('title', 'Nutriscore unreachable')
+		}
+	}
+
+	/**
+	 * 	Affichage de l'image du novascore correspondant au produit
+	 * @param {*} param 	La valeur du novascore du produit
+	 */
+	function setNovascore(param) {
+		const novaImage = $('#nova-image')
+		const novaNotice = [
+			'Unprocessed or minimally processed foods',
+			'Processed culinary ingredients',
+			'Processed foods',
+			'Ultra-processed food and drink products',
+		]
+
+		if (/^[1-4]$/.test(param)) {
+			novaImage.attr(
+				'src',
+				`/ressources/novascore/novascore-${param}.svg`
+			)
+			novaImage.attr('alt', `NOVA ${param}`)
+			novaImage.attr('title', novaNotice[param - 1])
+		} else {
+			novaImage.attr('src', '/ressources/novascore/novascore-default.svg')
+			novaImage.attr('alt', 'Novascore unreachable')
+			novaImage.attr('title', 'Novascore unreachable')
+		}
+	}
+
+	/**
+	 * 	Affichage de l'image de l'ecoscore correspondant au produit
+	 * @param {*} param 	La valeur de l'ecoscore du produit
+	 */
+	function setEcoscore(param) {
+		const ecoImage = $('#eco-image')
+
+		if (/^[a-e]$/.test(param)) {
+			ecoImage.attr('src', `/ressources/ecoscore/ecoscore-${param}.svg`)
+			ecoImage.attr('alt', 'Ecoscore ' + param.toUpperCase())
+			switch (param) {
+				case 'a':
+					ecoImage.attr('title', 'Very low environmental impacts')
+					break
+				case 'b':
+					ecoImage.attr('title', 'Low environmental impacts')
+					break
+				case 'c':
+					ecoImage.attr('title', 'Medium environmental impacts')
+					break
+				case 'd':
+					ecoImage.attr('title', 'High environmental impacts')
+					break
+				case 'e':
+					ecoImage.attr('title', 'Very high environmental impacts')
+					break
+			}
+		} else {
+			ecoImage.attr('src', '/ressources/ecoscore/ecoscore-default.svg')
+			ecoImage.attr('alt', 'EcoScore unreachable')
+			ecoImage.attr('title', 'EcoScore unreachable')
+		}
+	}
+
+	/**
+	 * 	Affichage de l'image de statut vegetarien
+	 * @param {*} param 	La valeur du statut vegetarien du produit
+	 */
+	function setVeggieStatus(param) {
 		const veggie = $('#veggie-image')
 
-		data.product.ingredients_analysis_tags[2] === 'en:vegetarian'
+		param === 'en:vegetarian'
 			? veggie.removeClass('d-none')
 			: veggie.addClass('d-none')
 	}
 
-	function getNutriscore(data) {
-		switch (data.product.nutriscore_grade) {
-			case 'a':
-				nutriImage.attr(
-					'src',
-					'/ressources/nutriscore/nutriscore-a.svg'
-				)
-				nutriImage.attr('alt', 'NutriScore A')
-				nutriImage.attr('title', 'Excellent nutritional quality')
-				break
-			case 'b':
-				nutriImage.attr(
-					'src',
-					'/ressources/nutriscore/nutriscore-b.svg'
-				)
-				nutriImage.attr('alt', 'NutriScore B')
-				nutriImage.attr('title', 'Good nutritional quality')
-				break
-			case 'c':
-				nutriImage.attr(
-					'src',
-					'/ressources/nutriscore/nutriscore-c.svg'
-				)
-				nutriImage.attr('alt', 'NutriScore C')
-				nutriImage.attr('title', 'Moderate nutritional quality')
-				break
-			case 'd':
-				nutriImage.attr(
-					'src',
-					'/ressources/nutriscore/nutriscore-d.svg'
-				)
-				nutriImage.attr('alt', 'NutriScore D')
-				nutriImage.attr('title', 'Poor nutritional quality')
-				break
-			case 'e':
-				nutriImage.attr(
-					'src',
-					'/ressources/nutriscore/nutriscore-e.svg'
-				)
-				nutriImage.attr('alt', 'NutriScore E')
-				nutriImage.attr('title', 'Very poor nutritional quality')
-				break
-		}
-	}
+	/**
+	 * 	Remplissage de niveau de nutrition pour 100g
+	 * @param {*} data 		Les données du produit provenant du getJSON
+	 */
+	function setNutrientLevel(data) {
+		// Liste des éléments dont on affiche les indicateurs pour 100g
+		const nutrientList = ['fat', 'saturated-fat', 'sugars', 'salt']
 
-	function getNovascore(data) {
-		switch (data.product.nova_group) {
-			case 1:
-				novaImage.attr('src', '/ressources/novascore/novascore-1.svg')
-				novaImage.attr('alt', 'NOVA 1')
-				novaImage.attr(
-					'title',
-					'Unprocessed or minimally processed foods'
-				)
-				break
-			case 2:
-				novaImage.attr('src', '/ressources/novascore/novascore-2.svg')
-				novaImage.attr('alt', 'NOVA 2')
-				novaImage.attr('title', 'Processed culinary ingredients')
-				break
-			case 3:
-				novaImage.attr('src', '/ressources/novascore/novascore-3.svg')
-				novaImage.attr('alt', 'NOVA 3')
-				novaImage.attr('title', 'Processed foods')
-				break
-			case 4:
-				novaImage.attr('src', '/ressources/novascore/novascore-4.svg')
-				novaImage.attr('alt', 'NOVA 4')
-				novaImage.attr(
-					'title',
-					'Ultra-processed food and drink products'
-				)
-				break
-		}
-	}
+		nutrientList.forEach((nutrient) => {
+			const element = $(`#nutrient-${nutrient}`)
+			const nutrient_100g = `${nutrient}_100g`
 
-	function getEcoscore(data) {
-		switch (data.product.ecoscore_grade) {
-			case 'a':
-				ecoimage.attr('src', '/ressources/ecoscore/ecoscore-a.svg')
-				ecoimage.attr('alt', 'EcoScore A')
-				ecoimage.attr('title', 'Very low environmental impacts')
-				break
-			case 'b':
-				ecoimage.attr('src', '/ressources/ecoscore/ecoscore-b.svg')
-				ecoimage.attr('alt', 'EcoScore B')
-				ecoimage.attr('title', 'Low environmental impacts')
-				break
-			case 'c':
-				ecoimage.attr('src', '/ressources/ecoscore/ecoscore-c.svg')
-				ecoimage.attr('alt', 'EcoScore C')
-				ecoimage.attr('title', 'Medium environmental impacts')
-				break
-			case 'd':
-				ecoimage.attr('src', '/ressources/ecoscore/ecoscore-d.svg')
-				ecoimage.attr('alt', 'EcoScore D')
-				ecoimage.attr('title', 'High environmental impacts')
-				break
-			case 'e':
-				ecoimage.attr('src', '/ressources/ecoscore/ecoscore-e.svg')
-				ecoimage.attr('alt', 'EcoScore E')
-				ecoimage.attr('title', 'Very high environmental impacts')
-				break
-		}
-	}
-
-	function getNutrientLevel(data, item) {
-		const element = $(`#nutrient-${item}`)
-
-		switch (item) {
-			case 'fat':
+			if (data.product.nutrient_levels[nutrient]) {
+				element.removeClass('d-none')
 				element.html(
-					getNutrientLevelSymbol(data.product.nutrient_levels.fat) +
-						' ' +
-						data.product.nutriments.fat_100g +
-						data.product.nutriments.fat_unit +
-						' of Fat'
+					`${getNutrientLevelSymbol(
+						data.product.nutrient_levels[nutrient]
+					)} ${nutrient} (${
+						data.product.nutriments[nutrient_100g]
+					} g)`
 				)
-				break
-			case 'saturated-fat':
-				element.html(
-					getNutrientLevelSymbol(
-						data.product.nutrient_levels['saturated-fat']
-					) +
-						' ' +
-						data.product.nutriments['saturated-fat_100g'] +
-						data.product.nutriments['saturated-fat_unit'] +
-						' of Saturated Fat'
-				)
-				break
-			case 'sugars':
-				element.html(
-					getNutrientLevelSymbol(
-						data.product.nutrient_levels.sugars
-					) +
-						' ' +
-						data.product.nutriments.sugars_100g +
-						data.product.nutriments.sugars_unit +
-						' of Sugars'
-				)
-				break
-			case 'salt':
-				element.html(
-					getNutrientLevelSymbol(data.product.nutrient_levels.salt) +
-						' ' +
-						data.product.nutriments.salt_100g +
-						data.product.nutriments.salt_unit +
-						' of Salt'
-				)
-				break
+			} else {
+				element.addClass('d-none')
+			}
+		})
+
+		function getNutrientLevelSymbol(param) {
+			switch (param) {
+				case 'low':
+					return '🟢 low quantity of'
+				case 'moderate':
+					return '🟠 moderate quantity of'
+				case 'high':
+					return '🔴 high quantity of'
+			}
 		}
 	}
 
-	function getNutrientLevelSymbol(data) {
-		switch (data) {
-			case 'low':
-				return '🟢'
-			case 'moderate':
-				return '🟠'
-			case 'high':
-				return '🔴'
-		}
-	}
-
+	/**
+	 * 	Remplissage du tableau nutritionnel
+	 * @param {*} data 		Les données du produit provenant du getJSON
+	 */
 	function fillTable(data) {
-		/* ENERGY */
-		const energy = $('#row_energy')
+		// Liste des éléments que l'on affiche dans le tableau
+		const nutrientList = [
+			'energy',
+			'fat',
+			'saturated-fat',
+			'carbohydrates',
+			'sugars',
+			'fiber',
+			'proteins',
+			'salt',
+			'alcohol',
+			'fruit',
+		]
 
-		if (data.product.nutriments['energy-kj_100g'] != null) {
-			energy
-				.children()
-				.next()
-				.html(
-					data.product.nutriments['energy-kj_100g'] +
-						' ' +
-						data.product.nutriments['energy-kj_unit'] +
-						' (' +
-						data.product.nutriments['energy-kcal_100g'] +
-						' ' +
-						data.product.nutriments['energy-kcal_unit'] +
-						')'
-				)
-		}
+		nutrientList.forEach((nutrient) => {
+			const element = $(`#row_${nutrient}`)
+			let nutrient_100g, value
 
-		/* FAT */
-		const fat = $('#row_fat')
-
-		if (data.product.nutriments.fat_100g != null) {
-			fat.children()
-				.next()
-				.html(
-					data.product.nutriments.fat_100g +
-						' ' +
-						data.product.nutriments.fat_unit
-				)
-		}
-
-		/* SATURATED FAT */
-		const satFat = $('#row_saturated-fat')
-
-		if (data.product.nutriments['saturated-fat_100g'] != null) {
-			satFat
-				.children()
-				.next()
-				.html(
-					data.product.nutriments['saturated-fat_100g'] +
-						' ' +
-						data.product.nutriments['saturated-fat_unit']
-				)
-		}
-
-		/* CARBOHYDRATES */
-		const carbo = $('#row_carbohydrates')
-
-		if (data.product.nutriments.carbohydrates_100g != null) {
-			carbo
-				.children()
-				.next()
-				.html(
-					data.product.nutriments.carbohydrates_100g +
-						' ' +
-						data.product.nutriments.carbohydrates_unit
-				)
-		}
-
-		/* SUGARS */
-		const sugars = $('#row_sugars')
-
-		if (data.product.nutriments.sugars_100g != null) {
-			sugars
-				.children()
-				.next()
-				.html(
-					data.product.nutriments.sugars_100g +
-						' ' +
-						data.product.nutriments.sugars_unit
-				)
-		}
-
-		/* FIBERS */
-		const fibers = $('#row_fiber')
-
-		if (data.product.nutriments.fiber_100g != null) {
-			fibers
-				.children()
-				.next()
-				.html(
-					data.product.nutriments.fiber_100g +
-						' ' +
-						data.product.nutriments.fiber_unit
-				)
-		}
-
-		/* PROTEINS */
-		const proteins = $('#row_proteins')
-
-		if (data.product.nutriments.proteins_100g != null) {
-			proteins
-				.children()
-				.next()
-				.html(
-					data.product.nutriments.proteins_100g +
-						' ' +
-						data.product.nutriments.proteins_unit
-				)
-		}
-
-		/* SALT */
-		const salt = $('#row_salt')
-
-		if (data.product.nutriments.salt_100g != null) {
-			salt.children()
-				.next()
-				.html(
-					data.product.nutriments.salt_100g +
-						' ' +
-						data.product.nutriments.salt_unit
-				)
-		}
-
-		/* ALCOHOL */
-		const alcohol = $('#row_alcohol')
-
-		if (data.product.nutriments.alcohol_100g != null) {
-			alcohol
-				.children()
-				.next()
-				.html(
-					data.product.nutriments.alcohol_100g +
-						' ' +
-						data.product.nutriments.alcohol_unit
-				)
-		}
-
-		/* FRUIT / VEGETABLE */
-		const fruit = $('#row_fruit')
-
-		if (
-			data.product.nutriments[
-				'fruits-vegetables-nuts-estimate-from-ingredients_100g'
-			] != null
-		) {
-			fruit
-				.children()
-				.next()
-				.html(
-					data.product.nutriments[
+			switch (nutrient) {
+				case 'energy':
+					nutrient_100g = 'energy-kj_100g'
+					value = `${data.product.nutriments['energy-kj_100g']} kJ / ${data.product.nutriments['energy-kcal_100g']} kcal`
+					break
+				case 'alcohol':
+					nutrient_100g = 'alcohol_100g'
+					value = data.product.nutriments['alcohol_100g'] + ' % vol'
+					break
+				case 'fruits':
+					nutrient_100g =
 						'fruits-vegetables-nuts-estimate-from-ingredients_100g'
-					] + ' %'
-				)
-		}
+					value = `${data.product.nutriments['fruits-vegetables-nuts-estimate-from-ingredients_100g']} %`
+					break
+				default:
+					nutrient_100g = `${nutrient}_100g`
+					value = `${data.product.nutriments[nutrient_100g]} g`
+					break
+			}
+
+			// Remplissage du tableau
+			if (data.product.nutriments[nutrient_100g] != null) {
+				element.removeClass('d-none')
+				element.children().next().html(value)
+			} else {
+				element.addClass('d-none')
+			}
+		})
 	}
 
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 	/*                            LISTENERS                      	*/
 	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
-	// Listener sur le champs de recherche de code barre
-	$(barcodeField).keyup(() => {
-		if ($(barcodeField).val().trim().length === 13) {
-			getProductData($(barcodeField).val())
+	/**
+	 *	Initialisation de l'input field avec ajout du listener
+	 */
+	function initInputFunction() {
+		const barcodeField = $('#product-searchfield')
+
+		$(barcodeField).keyup(listenerInputFunction)
+	}
+
+	/**
+	 *  Action du listener sur l'input field
+	 */
+	function listenerInputFunction() {
+		if (/^(\d{8,13})$/.test(this.value.trim())) {
+			getProductData(this.value.trim())
 		}
-	})
+	}
+
+	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
+	/*                            INITIALIZE                        */
+	/*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
+
+	initInputFunction()
 })

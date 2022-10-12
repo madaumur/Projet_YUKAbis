@@ -29,6 +29,11 @@ input:focus {
 	color: #eb9a9a;
 }
 
+.hide {
+	display: none;
+	visibility: hidden;
+}
+
 /*-Main-----------------------------------------------------------*/
 main {
 	align-self: center;
@@ -38,21 +43,21 @@ main {
 }
 
 /*-Main_Header----------------------------------------------------*/
-#container-h1 {
+#container-title {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-#container-h1 h1 {
+#container-title h1 {
 	margin: 0;
 	margin-top: 5%;
 	width: 100%;
 	text-align: center;
 }
 
-#container-h1 label {
+#container-title label {
 	margin-bottom: 5%;
 	width: 100%;
 	text-align: center;
@@ -60,7 +65,7 @@ main {
 	font-size: x-small;
 }
 
-#container-h1-A {
+#title-input {
 	width: 100%;
 	padding: 5% 0% 5% 0%;
 
@@ -75,6 +80,7 @@ main {
 
 #barcode-field {
 	width: 70%;
+	max-width: 250px;
 	border-bottom: #d6d6d6 1px solid;
 	text-align: center;
 }
@@ -85,7 +91,7 @@ main {
 }
 
 /*-Main_Container1 : infos produit--------------------------------*/
-#container-b1 {
+#container-product {
 	width: 100%;
 
 	display: flex;
@@ -94,18 +100,18 @@ main {
 	flex-wrap: wrap;
 }
 
-#container-b1-A {
+#product-image {
 	max-height: 200px;
 	width: 25%;
 	padding: 1em 1em 1em 1em;
 }
 
-#container-b1-A img {
+#product-image img {
 	max-width: 100%;
 	max-height: 100%;
 }
 
-#container-b1-B {
+#product-label {
 	width: 65%;
 	padding: 1em 1em 1em 1em;
 
@@ -114,14 +120,14 @@ main {
 	align-items: left;
 }
 
-#container-b1-B label {
+#product-label label {
 	padding-bottom: 10%;
 	font-size: large;
 	font-weight: bold;
 }
 
 /*-Main_Accordeon-------------------------------------------------*/
-.accordeon {
+.accordion {
 	background-color: #2b2b2b;
 	color: #d6d6d6;
 
@@ -136,12 +142,12 @@ main {
 	outline: none;
 }
 
-.accordeon:hover {
+.accordion:hover {
 	background-color: #2e2e2e;
 	color: #75d84e;
 }
 
-.accordeon:after {
+.accordion:after {
 	content: '⮟';
 	color: #d6d6d6;
 	float: right;
@@ -160,10 +166,7 @@ main {
 }
 
 /*-Main_Accordeon_Container---------------------------------------*/
-#container-b2,
-#container-b3,
-#container-b4,
-#container-b5 {
+.panel-body {
 	overflow: hidden;
 	display: none;
 	flex-direction: column;
@@ -177,57 +180,52 @@ main {
 }
 
 /*-Main_Container2 : indicateurs----------------------------------*/
-#container-b2 {
+#panel-one-body {
 	flex-direction: row;
 	justify-content: center;
 	flex-wrap: wrap;
 }
 
-#container-b2 img {
+#panel-one-body img {
 	padding: 1em;
 	max-height: 70px;
 }
 
-#veggie-image {
-	display: none;
-}
 /*-Main_Container3 : valeur au 100g-------------------------------*/
-#b3-A {
-	display: flex;
+#panel-two-body {
 	flex-direction: column;
 	align-items: left;
 	padding: 1em 5%;
 }
 
-#b3-A label {
+#panel-two-body label {
 	padding-bottom: 1em;
 }
 
 /*-Main_Container4 : tableau des nutritions-----------------------*/
-#b4-A {
+#panel-three-body {
 	padding: 1em 10%;
 }
 
-#b4-A table {
+#panel-three-body table {
 	border-collapse: collapse;
 }
 
-#b4-A table,
-#b4-A td,
-#b4-A th {
-	padding: 0.4em 1em;
-	border: 1px solid #8f8f8f;
-}
-
-#b4-A thead,
-#b4-A thead th {
+#panel-three-body thead,
+#panel-three-body thead th {
 	background-color: #242424;
 	border: 2px solid #a1a1a1;
 }
 
+#panel-three-body table,
+#panel-three-body td,
+#panel-three-body th {
+	padding: 0.4em 1em;
+	border: 1px solid #8f8f8f;
+}
+
 /*-Main_Container5 : liste des ingrédients_-----------------------*/
-#b5-A {
-	display: flex;
+#panel-four-body {
 	flex-direction: column;
 	align-items: left;
 	padding: 1em 5%;
@@ -240,7 +238,7 @@ main {
 }
 
 /*-Main_Container6 : Faite des dons-------------------------------*/
-#container-b6 {
+#container-donation {
 	margin: 2%;
 	text-align: center;
 
@@ -251,7 +249,7 @@ main {
 	margin-bottom: 0;
 }
 
-#container-b6 a {
+#container-donation a {
 	border-radius: 1000px;
 
 	cursor: pointer;
@@ -278,13 +276,13 @@ footer {
 	text-align: center;
 }
 
-#container-f1 a {
+#container-footer a {
 	color: #d6d6d6;
 
 	text-decoration: none;
 	padding: 1em;
 }
 
-#container-f1 a:hover {
+#container-footer a:hover {
 	color: #75d84e;
 }
