@@ -9,6 +9,11 @@ const barcodeField: HTMLInputElement | null =
 /*                              CLASS                      	    */
 /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
 
+/**
+ * @export
+ * @class Product
+ * @constructor Create product from Fetch data
+ */
 class Product {
 	//General info ( marque, nom, quantité, image )
 	brand: string = 'product brand'
@@ -36,7 +41,7 @@ class Product {
 	energy_kcal_100g: number = 0
 	energy_kj_100g: number = 0
 	carbohydrates_qty_100g: number = 0
-	fibers_qty_100g: number = 0
+	fiber_qty_100g: number = 0
 	proteins_qty_100g: number = 0
 	alcohol_qty: number = 0
 	vegetable_qty_100g: number = 0
@@ -76,7 +81,7 @@ class Product {
 			this.energy_kcal_100g = data.product.nutriments['energy-kcal_100g']
 			this.carbohydrates_qty_100g =
 				data.product.nutriments.carbohydrates_100g
-			this.fibers_qty_100g = data.product.nutriments.fiber_100g
+			this.fiber_qty_100g = data.product.nutriments.fiber_100g
 			this.proteins_qty_100g = data.product.nutriments.proteins_100g
 			this.alcohol_qty = data.product.nutriments.alcohol_100g
 			this.vegetable_qty_100g =
@@ -316,76 +321,34 @@ function setVeggieStatus(param: string) {
  *
  * @param {Product} product		Les données du produit provenant du fetch
  */
-function setNutrientLevel(product: Product) {
+function setNutrientLevel(product: any) {
 	const nutrientList: string[] = ['fat', 'saturated_fat', 'sugars', 'salt']
 
 	nutrientList.forEach((nutrient: string) => {
-		const element = document.querySelector(
+		const element: HTMLImageElement | null = document.querySelector(
 			`#nutrient-` + nutrient
-		) as HTMLImageElement
+		)
 
-		switch (nutrient) {
-			case 'fat':
-				if (product.fat_level) {
-					element.classList.remove('hide')
-					element.innerHTML =
-						setNutrientLevelSymbol(product.fat_level) +
-						' fat (' +
-						product.fat_qty_100g +
-						' g)'
-				} else {
-					element.classList.add('hide')
-				}
-				break
-			case 'saturated_fat':
-				if (product.saturated_fat_level) {
-					element.classList.remove('hide')
-					element.innerHTML =
-						setNutrientLevelSymbol(product.saturated_fat_level) +
-						' saturated fat (' +
-						product.saturated_fat_qty_100g +
-						' g)'
-				} else {
-					element.classList.add('hide')
-				}
-				break
-			case 'sugars':
-				if (product.sugars_level) {
-					element.classList.remove('hide')
-					element.innerHTML =
-						setNutrientLevelSymbol(product.sugars_level) +
-						' sugars (' +
-						product.sugars_qty_100g +
-						' g)'
-				} else {
-					element.classList.add('hide')
-				}
-				break
-			case 'salt':
-				if (product.salt_level) {
-					element.classList.remove('hide')
-					element.innerHTML =
-						setNutrientLevelSymbol(product.salt_level) +
-						' salt (' +
-						product.salt_qty_100g +
-						' g)'
-				} else {
-					element.classList.add('hide')
-				}
-				break
-		}
-
-		function setNutrientLevelSymbol(nutrient_level: string) {
-			switch (nutrient_level) {
-				case 'low':
-					return '🟢 low quantity of '
-				case 'moderate':
-					return '🟠 moderate quantity of'
-				case 'high':
-					return '🔴 high quantity of'
-			}
+		if (element && product[`${nutrient}_level`]) {
+			element.classList.remove('hide')
+			element.innerHTML = `${getNutrientLevelSymbol(
+				product[`${nutrient}_level`]
+			)} ${nutrient} (${product[`${nutrient}_qty_100g`]} g)`
+		} else {
+			element?.classList.add('hide')
 		}
 	})
+
+	function getNutrientLevelSymbol(nutrient_level: string) {
+		switch (nutrient_level) {
+			case 'low':
+				return '🟢 low quantity of'
+			case 'moderate':
+				return '🟠 moderate quantity of'
+			case 'high':
+				return '🔴 high quantity of'
+		}
+	}
 }
 
 /**
@@ -393,110 +356,54 @@ function setNutrientLevel(product: Product) {
  *
  * @param {Product} product		Les données du produit provenant du fetch
  */
-function fillTable(product: Product) {
-	/* ENERGY */
-	const energy = document.querySelector('#row_energy') as HTMLElement
+function fillTable(product: any) {
+	// Liste des éléments que l'on affiche dans le tableau
+	const nutrientList = [
+		'energy',
+		'fat',
+		'saturated_fat',
+		'carbohydrates',
+		'sugars',
+		'fiber',
+		'proteins',
+		'salt',
+		'alcohol',
+		'fruit',
+	]
 
-	if (product.energy_kcal_100g != null || product.energy_kj_100g != null) {
-		energy.classList.remove('hide')
-		energy.childNodes[3].textContent =
-			product.energy_kcal_100g +
-			' kcal / ' +
-			product.energy_kj_100g +
-			' kJ'
-	} else {
-		energy.classList.add('hide')
-	}
+	nutrientList.forEach((nutrient: string) => {
+		const element = document.querySelector(
+			`#row_${nutrient}`
+		) as HTMLImageElement
+		let nutrient_100g, value
 
-	/* FAT */
-	const fat = document.querySelector('#row_fat') as HTMLElement
+		switch (nutrient) {
+			case 'energy':
+				nutrient_100g = 'energy_kj_100g'
+				value = `${product[nutrient_100g]} kJ / ${product['energy_kcal_100g']} kcal`
+				break
+			case 'alcohol':
+				nutrient_100g = 'alcohol_qty'
+				value = `${product[nutrient_100g]} % vol`
+				break
+			case 'fruit':
+				nutrient_100g = 'vegetable_qty_100g'
+				value = `${product[nutrient_100g]} %`
+				break
+			default:
+				nutrient_100g = `${nutrient}_qty_100g`
+				value = `${product[nutrient_100g]} g`
+				break
+		}
 
-	if (product.fat_qty_100g != null) {
-		fat.classList.remove('hide')
-		fat.childNodes[3].textContent = product.fat_qty_100g + ' g'
-	} else {
-		fat.classList.add('hide')
-	}
-
-	/* SATURATED FAT */
-	const satFat = document.querySelector('#row_saturated_fat') as HTMLElement
-
-	if (product.saturated_fat_qty_100g != null) {
-		satFat.classList.remove('hide')
-		satFat.childNodes[3].textContent = product.saturated_fat_qty_100g + ' g'
-	} else {
-		satFat.classList.add('hide')
-	}
-
-	/* CARBOHYDRATES */
-	const carbo = document.querySelector('#row_carbohydrates') as HTMLElement
-
-	if (product.carbohydrates_qty_100g != null) {
-		carbo.classList.remove('hide')
-		carbo.childNodes[3].textContent = product.carbohydrates_qty_100g + ' g'
-	} else {
-		carbo.classList.add('hide')
-	}
-
-	/* SUGARS */
-	const sugars = document.querySelector('#row_sugars') as HTMLElement
-
-	if (product.sugars_qty_100g != null) {
-		sugars.classList.remove('hide')
-		sugars.childNodes[3].textContent = product.sugars_qty_100g + ' g'
-	} else {
-		sugars.classList.add('hide')
-	}
-
-	/* FIBERS */
-	const fibers = document.querySelector('#row_fiber') as HTMLElement
-
-	if (product.fibers_qty_100g != null) {
-		fibers.classList.remove('hide')
-		fibers.childNodes[3].textContent = product.fibers_qty_100g + ' g'
-	} else {
-		fibers.classList.add('hide')
-	}
-
-	/* PROTEINS */
-	const proteins = document.querySelector('#row_proteins') as HTMLElement
-
-	if (product.proteins_qty_100g != null) {
-		proteins.classList.remove('hide')
-		proteins.childNodes[3].textContent = product.proteins_qty_100g + ' g'
-	} else {
-		proteins.classList.add('hide')
-	}
-
-	/* SALT */
-	const salt = document.querySelector('#row_salt') as HTMLElement
-
-	if (product.salt_qty_100g != null) {
-		salt.classList.remove('hide')
-		salt.childNodes[3].textContent = product.salt_qty_100g + ' g'
-	} else {
-		salt.classList.add('hide')
-	}
-
-	/* ALCOHOL */
-	const alcohol = document.querySelector('#row_alcohol') as HTMLElement
-
-	if (product.alcohol_qty != null) {
-		alcohol.classList.remove('hide')
-		alcohol.childNodes[3].textContent = product.alcohol_qty + ' % vol'
-	} else {
-		alcohol.classList.add('hide')
-	}
-
-	/* FRUIT / VEGETABLE */
-	const fruit = document.querySelector('#row_fruit') as HTMLElement
-
-	if (product.vegetable_qty_100g != null) {
-		fruit.classList.remove('hide')
-		fruit.childNodes[3].textContent = product.vegetable_qty_100g + ' %'
-	} else {
-		fruit.classList.add('hide')
-	}
+		// Remplissage du tableau
+		if (product[nutrient_100g] != null) {
+			element.classList.remove('hide')
+			element.childNodes[3].textContent = value
+		} else {
+			element.classList.add('hide')
+		}
+	})
 }
 
 /*  -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   */
